@@ -64,7 +64,7 @@ class Arduino {
                 }
             }, 500)
 
-            setTimeout(() => reject("Timeout occurred"), 60000)
+            setTimeout(() => reject("timeout"), 60000)
         })
     }
 }
