@@ -1,22 +1,60 @@
+log = require("con-logger");
+Arduino = require("./Arduino");
+
 class Pi {
+
     constructor() {
         this.schedule;
-        this.arduinos;
+        this.arduinos = [];
         this.status;
         this.serialNumber;
+        this.discover = false; // This is set to true when it receives an update from the API
         this.username;
         this.password; // TODO: Make sure that this is hashed
         this.setup();
     }
 
     // API call to the database to pull down any status updates. Should fire on ping from Pusher
-    getSchedule() { }
+    getUpdate() { }
 
     // Loop over all the arduinos and have them return their status with the serial number associated
     getAllStatus() { }
 
-    // Push the pi into a mode where it looks for a new arduino plugged in then registers it to the database
-    discover() { }
+    // Push the pi into a mode where it looks for a new arduino plugged in, checks to make sure it isn't already registered,
+    //  then registers it to the database 
+    async discover() {
+        // Allows discovery to run only when this.discover is true
+        while (this.discover) {
+            // Stores all ports that are available
+            let ports = await SerialPort.list()
+            ports.forEach(async port => {
+                // Checks to see if the port has a manufacturer and if that manufacturer includes arduino
+                if (port.manufacturer && port.manufacturer.split(" ").includes("Arduino")) {
+                    // Checks to see if the arduino is already in the array of arduinos
+                    if (!this.arduinos || !this.arduinos.some(arduino => arduino.serialNumber === port.serialNumber)) {
+
+                        let newArd = new Arduino(port.comName, port.serialNumber)
+
+                        let setup = await newArd.setup()
+
+                        log(setup)
+
+                        // Set the deviceId of the new arduino
+                        if (this.arduinos.length) {
+                            newArd.deviceId = this.arduinos[this.arduinos.length - 1].deviceId + 1
+                        } else {
+                            newArd.deviceId = 0
+                        }
+                        // Add the arduinos to the local set of devices
+                        this.arduinos.push(newArd)
+
+                        // TODO: Push the new device up to the database
+                        log(newArd)
+                    }
+                }
+            })
+        }
+    }
 
     // Primary method that will keep the program running and acting properly while it is on the pi
     // will respond to pusher to call this.getSchedule() and this.discover()
@@ -28,3 +66,5 @@ class Pi {
     setup() { }
 
 }
+
+module.exports = Pi
