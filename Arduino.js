@@ -28,14 +28,14 @@ class Arduino {
     // Method to get the overall system status of the devices attached (returns 0 or 1)
     getStatus() { }
 
-    // Method that takes in a response from the arduino and parses it appropriately
-    handleResponse(response) { }
-
     // Method that sends command to the arduino to turn the pump on
     startWater() { }
 
     // Method that sends command to the arduino to turn the pump off
     stopWater() { }
+
+    // Method that takes in a response from the arduino and parses it appropriately
+    handleResponse(response) { }
 
     // Method that initializes the serialport and parser. Must be called to initialize setup async
     setup() {

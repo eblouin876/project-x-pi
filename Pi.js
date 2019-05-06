@@ -41,6 +41,8 @@ class Pi {
             ports.forEach(async port => {
                 // Checks to see if the port has a manufacturer and if that manufacturer includes arduino
                 if (port.manufacturer && port.manufacturer.split(" ").includes("Arduino")) {
+                    // TODO: Add functionality to check and see if the id has been locally registered on a different port then change the port to match
+
                     // Checks to see if the arduino is already in the array of arduinos
                     if (!this.arduinos || !this.arduinos.some(arduino => arduino.serialNumber === port.serialNumber)) {
 
