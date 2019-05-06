@@ -15,5 +15,6 @@
 
 let Pi = require("./Pi")
 
-let test = new Pi()
-test.discover()
+let pi = new Pi()
+
+pi.discover()

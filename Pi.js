@@ -7,11 +7,11 @@ class Pi {
         this.arduinos = [];
         this.status;
         this.serialNumber;
-        this.discover = false; // This is set to true when it receives an update from the API
+        this.discovery = false; // This is set to true when it receives an update from the API
         this.username;
         this.password; // TODO: Make sure that this is hashed
-        this.setup();
-        this.run();
+        // this.setup();
+        // this.run();
     }
 
     // API call to the database to pull down any status updates. Should fire on ping from Pusher
@@ -35,7 +35,7 @@ class Pi {
     //  then registers it to the database 
     async discover() {
         // Allows discovery to run only when this.discover is true
-        while (this.discover) {
+        while (this.discovery) {
             // Stores all ports that are available
             let ports = await SerialPort.list();
             ports.forEach(async port => {
@@ -51,7 +51,7 @@ class Pi {
                         // Setup is called seperately so that we can await properly. It will break after 60 seconds of inactivity and set discover to false
                         let setup = await newArd.setup();
                         if (setup === "timeout") {
-                            this.discover = false;
+                            this.discovery = false;
                             return;
                         }
 
@@ -66,8 +66,7 @@ class Pi {
 
                         // TODO: Push the new device up to the database and set discover to false both locally and on the api
                         log(newArd);
-
-                        return
+                        return;
                     }
                 }
             })

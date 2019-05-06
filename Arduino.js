@@ -23,7 +23,15 @@ class Arduino {
     getAllStatusAndData() { }
 
     // Method that gets the status and data of a specific connected device
-    getStatusAndData(device) { }
+    getStatusAndData(device) {
+        let data = this.getAllStatusAndData()
+        switch (data) {
+            case pump:
+                break;
+            default:
+                break;
+        }
+    }
 
     // Method to get the overall system status of the devices attached (returns 0 or 1)
     getStatus() { }
