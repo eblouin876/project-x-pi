@@ -1,37 +1,47 @@
 log = require("con-logger");
 Arduino = require("./Arduino");
 SerialPort = require("serialport");
+axios = require("axios");
 
 class Pi {
 
+    #username = "";
+    #password = "";
+    #UID = "";
     constructor() {
         this.arduinos = [];
         this.status;
         this.deviceId;
         this.discovery = false; // This is set to true when it receives an update from the API
-        const username = "";
-        const password = "";
-        // this.run();
+         // this.run();
     }
 
     // API call to the database to pull down any status updates. Should fire on ping from Pusher
     getUpdate() {
-
+        axios
+            .get(`https://nameless-reef-34646.herokuapp.com/api/getUpdate/${this.#UID}`)
+            .then(data =>{
+                console.log(data.piDevice.arduinos);
+        })
+            .catch(console.log)
     }
-
-    water() {}
 
     // Loop over all the arduinos and have them return their status with the serial number associated
     getAllStatus() {
         if (this.arduinos.length) {
             let data = {};
             this.arduinos.forEach(arduino => {
-                data[arduino.serialNumber] = arduino.getAllStatus();
+                arduino.getAllStatusAndData();
+                data[arduino.serialNumber] = arduino.data;
             });
             return data;
         } else {
             return "No devices present"
         }
+    }
+
+    updateApi() {
+
     }
 
     // Push the pi into a mode where it looks for a new arduino plugged in, checks to make sure it isn't already registered,
@@ -93,10 +103,7 @@ class Pi {
     // will respond to pusher to call this.getSchedule() and this.discover()
     run() {
         this.setup();
-        while(true) {
-            // Pusher listener
-            this.discover();
-        }
+        this.discovery = setInterval(this.discover, 5000)
     }
 
     // Initial script that will have the user connect to wifi or plug in ethernet and put in their username/password

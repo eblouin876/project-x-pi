@@ -19,13 +19,14 @@ class Arduino {
         this.status = 2; // 0 is good, 1 is error, 2 is unassigned
         this.waterOnTimers = [];
         this.waterOffTimers = [];
+        this.data;
     }
 
     // Method that sets the watering schedule whenever a new schedule comes in from the database
     // Will clear previous timers, take in the object, parse it, and  set intervals based on the input
     setWateringSchedule(schedule){ }
 
-    // Method that returns the status of all connected devices and their data as an object
+    // Method that returns the status of all connected devices and their data as an object and updates this.data
     getAllStatusAndData() { }
 
     // Method that gets the status and data of a specific connected device
