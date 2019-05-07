@@ -1,4 +1,5 @@
 const Pusher = require('pusher');
+const PusherClient = require('pusher-client');
 
 class livePusher {
     constructor(UID) {
@@ -7,8 +8,7 @@ class livePusher {
             key: 'b48dc9f2091a8e7665e9',
             secret: '2c9bbd22117b146fe968',
             cluster: 'us3',
-            encrypted: true,
-            forceTLS: true
+            encrypted: true
         });
         this.id = UID;
         this.channels = [];
@@ -28,7 +28,11 @@ class livePusher {
      * @param cb - Callback function to run when an update is triggered. Should one parameter which will be the UID where the event was triggered
      */
     subscribe(cb) {
-        let channel = this.pusher.subscribe('project-x');
+        let pusher = new PusherClient('b48dc9f2091a8e7665e9', {
+            cluster: 'us3',
+            forceTLS: true
+        });
+        let channel = pusher.subscribe('project-x');
         channel.bind('update', cb);
         this.channels.push(channel);
     }

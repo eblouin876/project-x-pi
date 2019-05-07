@@ -19,16 +19,14 @@ class Pi {
         this._username = "";
         this._password = "";
         this._UID = "";
-        //this.run();
+        // The interceptor adds the user to the header object in the request if authentication has occurred properly
         this.interceptor = axios.interceptors.request.use((config) => {
-            log(config);
             if(this._UID){
                 config.headers = {user: this._UID};
             }
             return config;
         }, (error) => {
-            // Do something with request error
-            return Promise.reject(error);
+            return error;
         });
     }
 
@@ -75,7 +73,7 @@ class Pi {
                 })
             })
         }
-        axios
+        return axios
             .post(`https://nameless-reef-34646.herokuapp.com/api/updateArduino/`, data)
             .then(() => this.pusher.trigger() ) // Triggers an update event on the listener
             .catch(err => {if(err) console.log(err)})
@@ -148,7 +146,7 @@ class Pi {
     // Initial script that will have the user connect to wifi and log in to their account
     async setup() {
         wifi.init({iface: null});
-        await this._setupWifi();
+        // await this._setupWifi();
         await this._getCredentials();
         await this._authenticate();
     }
