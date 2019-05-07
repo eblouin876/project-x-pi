@@ -17,4 +17,4 @@ let Pi = require("./Pi")
 
 let pi = new Pi()
 
-pi.discover()
+pi._getCredentials()

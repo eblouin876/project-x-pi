@@ -1,28 +1,31 @@
-import Pusher from "pusher";
-import Arduino from "Arduino";
-
+const Pusher = require("./Pusher");
+const Arduino = require("./Arduino");
 const log = require("con-logger");
 const SerialPort = require("serialport");
 const axios = require("axios");
+const inquirer = require("inquirer");
+const wifi = require("node-wifi");
 
 class Pi {
 
-    #username = "";
-    #password = "";
-    #UID = "";
+
     constructor() {
         this.arduinos = [];
         this.status;
         this.deviceId;
         this.discovery;
         this.pusher;
-         // this.run();
+        this.statusChecker;
+        this._username = "";
+        this._password = "";
+        this._UID = "";
+        this.run();
     }
 
     // API call to the database to pull down any status updates. Should fire on ping from Pusher
     getUpdate() {
         axios
-            .get(`https://nameless-reef-34646.herokuapp.com/api/getUpdate/${this.#UID}`)
+            .get(`https://nameless-reef-34646.herokuapp.com/api/getUpdate/${this._UID}`)
             .then(data =>{
                 console.log(data)
                 console.log(data.piDevice.arduinos);
@@ -39,6 +42,7 @@ class Pi {
                 arduino.getAllStatusAndData();
                 data[arduino.serialNumber] = arduino.data;
             });
+            this.updateApi();
             return data;
         } else {
             return "No devices present"
@@ -46,7 +50,7 @@ class Pi {
     }
 
     updateApi() {
-        let data = {id: this.#UID, arduinos:[], status: this.status};
+        let data = {id: this._UID, arduinos:[], status: this.status};
         if(this.arduinos.length){
             this.arduinos.forEach(arduino =>{
                 data.arduinos.push({
@@ -124,15 +128,75 @@ class Pi {
     // will respond to pusher to call this.getSchedule() and this.discover()
     run() {
         this.setup();
-        this.pusher = new Pusher(this.#UID);
+        this.getUpdate();
+        this.pusher = new Pusher(this._UID);
+        this.pusher.subscribe(UID => {if(UID === this._UID) this.getUpdate()});
         this.discovery = setInterval(this.discover, 5000);
+        this.statusChecker = setInterval(this.getAllStatus, 300000);
     }
 
     // Initial script that will have the user connect to wifi or plug in ethernet and put in their username/password
     // generated on the app. It will then log in and trigger the API to update to connected and set the status
     // to 0 when the setup has completed correctly. **NOTE** Gets device id from account
-    setup() { }
+    async setup() {
+        wifi.init({iface: null});
+        await this._setupWifi();
+        await this._getCredentials();
+        await this._authenticate();
+    }
 
+    async _setupWifi() {
+        let ssid = await inquirer.prompt({
+            name: "data",
+            message: "Enter your wifi's name (SSID): ",
+            validate: (data) => {
+                if (data) return true
+            }
+        });
+        let wifipwd = await inquirer.prompt({
+            name: "data",
+            message: "Enter your wifi password: ",
+            validate: (data) => {
+                if (data) return true
+            },
+            type: "password"
+        });
+
+        let wifiLogin = {ssid: ssid.data, password: wifipwd.data};
+
+        return wifi.connect(wifiLogin, err => {
+            if (err) {
+                console.log(err);
+            }
+            console.log('Connected');
+        });
+    }
+
+    async _getCredentials() {
+        let username = await inquirer.prompt({
+            name: "data",
+            message: "Enter your account username: "
+
+        });
+        let password = await inquirer.prompt({
+            name: "data",
+            message: "Enter your account password: ",
+            type: "password"
+        });
+        this._password = password.data;
+        this._username = username.data;
+        log(this._username);
+        log(this._password);
+    }
+
+    async _authenticate() {
+        axios
+            .post("https://nameless-reef-34646.herokuapp.com/api/login", {username: this._username, password: this._password})
+            .then(data => {
+                this._UID = data.UID;
+                this.deviceId = data.deviceId;
+            })
+    }
 }
 
 module.exports = Pi;
