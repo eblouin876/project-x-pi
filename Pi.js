@@ -20,19 +20,28 @@ class Pi {
         this._password = "";
         this._UID = "";
         //this.run();
+        this.interceptor = axios.interceptors.request.use((config) => {
+            log(config);
+            if(this._UID){
+                config.headers = {user: this._UID};
+            }
+            return config;
+        }, (error) => {
+            // Do something with request error
+            return Promise.reject(error);
+        });
     }
 
     // API call to the database to pull down any status updates. Should fire on ping from Pusher
     getUpdate() {
         return axios
-            .get(`https://nameless-reef-34646.herokuapp.com/api/getUpdate/${this._UID}`)
+            .get(`https://nameless-reef-34646.herokuapp.com/api/arduinos`)
             .then(data =>{
-                console.log(data);
-                console.log(data.piDevice.arduinos);
+                console.log(data.data);
+                console.log(data.data.piDevice.arduinos);
                 // TODO: Check the deviceId: if not set, set it, if set, make sure it is correct
                 // TODO:  Have it set the schedule and plantName for the one with the associated serial number
-        })
-            .catch(err => {if(err) console.log(err)})
+        }).catch(err => {if(err) console.log(err)})
     }
 
     // Loop over all the arduinos and have them return their status with the serial number associated
@@ -191,7 +200,13 @@ class Pi {
         return axios
             .post("https://nameless-reef-34646.herokuapp.com/api/login", {username: this._username, password: this._password})
             .then(data => {
-                this._UID = data.data.UID
+                this._UID = data.data.UID;
+                return "Authenticated"
+            })
+            .catch(async () => {
+                console.log("Incorrect credentials, please try again");
+                await this._getCredentials();
+                return await this._authenticate();
             })
     }
 }

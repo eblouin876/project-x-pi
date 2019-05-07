@@ -19,7 +19,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Arduino.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-173">
+            <state relative-caret-position="432">
               <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
               <folding>
                 <element signature="n#!!block;n#getStatusAndData#0;n#Arduino#0" />
@@ -32,10 +32,9 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Pi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="193" selection-start-line="193" selection-end-line="193" />
+            <state relative-caret-position="231">
+              <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
               <folding>
-                <element signature="n#!!block;n#getUpdate#0;n#Pi#0" />
                 <element signature="n#!!block;n#getAllStatus#0;n#Pi#0" />
                 <element signature="n#!!block;n#updateApi#0;n#Pi#0" />
                 <element signature="e#1434#1458#0" />
@@ -45,6 +44,7 @@
                 <element signature="e#4481#5322#0" />
                 <element signature="n#!!block;n#_setupWifi#0;n#Pi#0" />
                 <element signature="n#!!block;n#_authenticate#0;n#Pi#0" />
+                <element signature="n#!!block;n#_authenticate#0;n#Pi#0" />
               </folding>
             </state>
           </provider>
@@ -53,8 +53,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scratchPad.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="409">
+              <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -163,12 +163,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1557165818999</updated>
-      <workItem from="1557165820341" duration="15878000" />
+      <workItem from="1557165820341" duration="19184000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15878000" />
+    <option name="totallyTimeSpent" value="19184000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -212,9 +212,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Response.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Arduino.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-173">
+        <state relative-caret-position="432">
           <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
           <folding>
             <element signature="n#!!block;n#getStatusAndData#0;n#Arduino#0" />
@@ -223,17 +230,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Response.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scratchPad.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="409">
+          <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -242,10 +242,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Pi.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="193" selection-start-line="193" selection-end-line="193" />
+        <state relative-caret-position="231">
+          <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
           <folding>
-            <element signature="n#!!block;n#getUpdate#0;n#Pi#0" />
             <element signature="n#!!block;n#getAllStatus#0;n#Pi#0" />
             <element signature="n#!!block;n#updateApi#0;n#Pi#0" />
             <element signature="e#1434#1458#0" />
@@ -254,6 +253,7 @@
             <element signature="e#4342#5442#0" />
             <element signature="e#4481#5322#0" />
             <element signature="n#!!block;n#_setupWifi#0;n#Pi#0" />
+            <element signature="n#!!block;n#_authenticate#0;n#Pi#0" />
             <element signature="n#!!block;n#_authenticate#0;n#Pi#0" />
           </folding>
         </state>

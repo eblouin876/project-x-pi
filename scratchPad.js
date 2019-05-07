@@ -20,6 +20,7 @@ async function test() {
     let pi = new Pi();
     await pi._getCredentials();
     await pi._authenticate();
+    await pi.getUpdate();
 }
 
 test();
