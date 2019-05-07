@@ -24,7 +24,7 @@ class Arduino {
 
     // Method that sets the watering schedule whenever a new schedule comes in from the database
     // Will clear previous timers, take in the object, parse it, and  set intervals based on the input
-    setWateringSchedule(schedule){ }
+    setWateringSchedule(){ }
 
     // Method that returns the status of all connected devices and their data as an object and updates this.data
     getAllStatusAndData() { }
