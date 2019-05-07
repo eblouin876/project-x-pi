@@ -11,24 +11,25 @@ class Pi {
 
     constructor() {
         this.arduinos = [];
-        this.status;
-        this.deviceId;
-        this.discovery;
-        this.pusher;
-        this.statusChecker;
+        this.status = 0;
+        this.deviceId = "";
+        this.discovery = "";
+        this.pusher = "";
+        this.statusChecker = "";
         this._username = "";
         this._password = "";
         this._UID = "";
-        this.run();
+        //this.run();
     }
 
     // API call to the database to pull down any status updates. Should fire on ping from Pusher
     getUpdate() {
-        axios
+        return axios
             .get(`https://nameless-reef-34646.herokuapp.com/api/getUpdate/${this._UID}`)
             .then(data =>{
-                console.log(data)
+                console.log(data);
                 console.log(data.piDevice.arduinos);
+                // TODO: Check the deviceId: if not set, set it, if set, make sure it is correct
                 // TODO:  Have it set the schedule and plantName for the one with the associated serial number
         })
             .catch(err => {if(err) console.log(err)})
@@ -42,15 +43,16 @@ class Pi {
                 arduino.getAllStatusAndData();
                 data[arduino.serialNumber] = arduino.data;
             });
-            this.updateApi();
             return data;
         } else {
             return "No devices present"
         }
     }
 
+    // Posts an update to the API and triggers an update event
     updateApi() {
         let data = {id: this._UID, arduinos:[], status: this.status};
+        // This parses through the arduino object and only keeps the data that we store on the server
         if(this.arduinos.length){
             this.arduinos.forEach(arduino =>{
                 data.arduinos.push({
@@ -66,12 +68,12 @@ class Pi {
         }
         axios
             .post(`https://nameless-reef-34646.herokuapp.com/api/updateArduino/`, data)
-            .then(() => this.pusher.trigger())
+            .then(() => this.pusher.trigger() ) // Triggers an update event on the listener
             .catch(err => {if(err) console.log(err)})
     }
 
-    // Push the pi into a mode where it looks for a new arduino plugged in, checks to make sure it isn't already registered,
-    //  then registers it to the database 
+    // Searches for any devices plugged in that are made by arduino, then registers them if they have not been previously registered
+    // or re-registers them to the appropriate comName
     async discover() {
         // Stores all ports that are available
         let ports = await SerialPort.list();
@@ -124,10 +126,9 @@ class Pi {
         });
     }
 
-    // Primary method that will keep the program running and acting properly while it is on the pi
-    // will respond to pusher to call this.getSchedule() and this.discover()
-    run() {
-        this.setup();
+    // Primary method that will keep the program running and acting properly
+    async run() {
+        await  this.setup();
         this.getUpdate();
         this.pusher = new Pusher(this._UID);
         this.pusher.subscribe(UID => {if(UID === this._UID) this.getUpdate()});
@@ -135,9 +136,7 @@ class Pi {
         this.statusChecker = setInterval(this.getAllStatus, 300000);
     }
 
-    // Initial script that will have the user connect to wifi or plug in ethernet and put in their username/password
-    // generated on the app. It will then log in and trigger the API to update to connected and set the status
-    // to 0 when the setup has completed correctly. **NOTE** Gets device id from account
+    // Initial script that will have the user connect to wifi and log in to their account
     async setup() {
         wifi.init({iface: null});
         await this._setupWifi();
@@ -153,7 +152,7 @@ class Pi {
                 if (data) return true
             }
         });
-        let wifipwd = await inquirer.prompt({
+        let wifiPwd = await inquirer.prompt({
             name: "data",
             message: "Enter your wifi password: ",
             validate: (data) => {
@@ -162,13 +161,14 @@ class Pi {
             type: "password"
         });
 
-        let wifiLogin = {ssid: ssid.data, password: wifipwd.data};
+        let wifiLogin = {ssid: ssid.data, password: wifiPwd.data};
 
-        return wifi.connect(wifiLogin, err => {
+        return wifi.connect(wifiLogin, async err => {
             if (err) {
                 console.log(err);
+                return await this._setupWifi();
             }
-            console.log('Connected');
+            return 'Connected';
         });
     }
 
@@ -185,16 +185,13 @@ class Pi {
         });
         this._password = password.data;
         this._username = username.data;
-        log(this._username);
-        log(this._password);
     }
 
-    async _authenticate() {
-        axios
+    _authenticate() {
+        return axios
             .post("https://nameless-reef-34646.herokuapp.com/api/login", {username: this._username, password: this._password})
             .then(data => {
-                this._UID = data.UID;
-                this.deviceId = data.deviceId;
+                this._UID = data.data.UID
             })
     }
 }

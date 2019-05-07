@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d361287e-2864-4af1-b002-a2cf91b61270" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pi.js" beforeDir="false" afterPath="$PROJECT_DIR$/Pi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scratchPad.js" beforeDir="false" afterPath="$PROJECT_DIR$/scratchPad.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -35,8 +32,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Pi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="8" column="10" lean-forward="true" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+            <state relative-caret-position="379">
+              <caret line="193" selection-start-line="193" selection-end-line="193" />
               <folding>
                 <element signature="n#!!block;n#getUpdate#0;n#Pi#0" />
                 <element signature="n#!!block;n#getAllStatus#0;n#Pi#0" />
@@ -46,9 +43,7 @@
                 <element signature="e#2329#3471#0" />
                 <element signature="e#4342#5442#0" />
                 <element signature="e#4481#5322#0" />
-                <element signature="n#!!block;n#setup#0;n#Pi#0" />
                 <element signature="n#!!block;n#_setupWifi#0;n#Pi#0" />
-                <element signature="n#!!block;n#_authenticate#0;n#Pi#0" />
                 <element signature="n#!!block;n#_authenticate#0;n#Pi#0" />
               </folding>
             </state>
@@ -58,8 +53,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scratchPad.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+            <state relative-caret-position="494">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -89,9 +84,11 @@
     <findStrings>
       <find>import</find>
       <find>#</find>
+      <find>wifipwd</find>
     </findStrings>
     <replaceStrings>
       <replace>_</replace>
+      <replace>wifiPwd</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -166,12 +163,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1557165818999</updated>
-      <workItem from="1557165820341" duration="14514000" />
+      <workItem from="1557165820341" duration="15878000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14514000" />
+    <option name="totallyTimeSpent" value="15878000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -208,13 +205,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Response.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Pusher.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="782">
@@ -233,10 +223,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Response.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scratchPad.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+        <state relative-caret-position="494">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -245,8 +242,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Pi.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="8" column="10" lean-forward="true" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+        <state relative-caret-position="379">
+          <caret line="193" selection-start-line="193" selection-end-line="193" />
           <folding>
             <element signature="n#!!block;n#getUpdate#0;n#Pi#0" />
             <element signature="n#!!block;n#getAllStatus#0;n#Pi#0" />
@@ -256,9 +253,7 @@
             <element signature="e#2329#3471#0" />
             <element signature="e#4342#5442#0" />
             <element signature="e#4481#5322#0" />
-            <element signature="n#!!block;n#setup#0;n#Pi#0" />
             <element signature="n#!!block;n#_setupWifi#0;n#Pi#0" />
-            <element signature="n#!!block;n#_authenticate#0;n#Pi#0" />
             <element signature="n#!!block;n#_authenticate#0;n#Pi#0" />
           </folding>
         </state>

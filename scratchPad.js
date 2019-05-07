@@ -13,8 +13,13 @@
 // Has startWater()
 // Has stopWater()
 
-let Pi = require("./Pi")
 
-let pi = new Pi()
 
-pi._getCredentials()
+async function test() {
+    let Pi = require("./Pi");
+    let pi = new Pi();
+    await pi._getCredentials();
+    await pi._authenticate();
+}
+
+test();
