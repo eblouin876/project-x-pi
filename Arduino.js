@@ -26,13 +26,23 @@ class Arduino {
     // Will clear previous timers, take in the object, parse it, and  set intervals based on the input
     setWateringSchedule(){ }
 
+    // Clears the watering schedule
+    clearWateringSchedule() {
+        for(let i = 0; i < this.waterOnTimers.length; i ++) {
+            clearInterval(this.waterOnTimers[i])
+        }
+        for(let i = 0; i < this.waterOffTimers.length; i++) {
+            clearInterval(this.waterOffTimers[i])
+        }
+    }
+
     // Method that returns the status of all connected devices and their data as an object and updates this.data
-    getAllStatusAndData() { }
+    reportSensors() { }
 
     // Method that gets the status and data of a specific connected device
     getStatusAndData(device) {
-        let data = this.getAllStatusAndData();
-        switch (data) {
+        let data = this.reportSensors();
+        switch (device) {
             case "pump":
                 break;
             case "temp":
@@ -66,7 +76,7 @@ class Arduino {
         return new Promise((resolve, reject) => {
             let parser = this.serialPort.pipe(new Readline());
             let ping = setInterval(() => this.serialPort.write("<status>"), 1000);
-
+            // TODO: Make sure to add appropriate check status command in place of above
             parser.on("data", data => {
                 let dataArr = data.split("~");
                 if (dataArr[0] === "status") {

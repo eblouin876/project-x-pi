@@ -18,8 +18,9 @@ class livePusher {
      * @description Triggers an event broadcast to notify that the api has been updated
      */
     trigger() {
+        console.log("triggered");
         this.pusher.trigger('project-x', 'update', {
-            id: this.UID
+            id: this.id
         });
     }
 
@@ -28,6 +29,7 @@ class livePusher {
      * @param cb - Callback function to run when an update is triggered. Should one parameter which will be the UID where the event was triggered
      */
     subscribe(cb) {
+        console.log("subscribed");
         let pusher = new PusherClient('b48dc9f2091a8e7665e9', {
             cluster: 'us3',
             forceTLS: true

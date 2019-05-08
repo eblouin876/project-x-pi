@@ -21,7 +21,7 @@ class Pi {
         this._UID = "";
         // The interceptor adds the user to the header object in the request if authentication has occurred properly
         this.interceptor = axios.interceptors.request.use((config) => {
-            if(this._UID){
+            if (this._UID) {
                 config.headers = {user: this._UID};
             }
             return config;
@@ -34,20 +34,39 @@ class Pi {
     getUpdate() {
         return axios
             .get(`https://nameless-reef-34646.herokuapp.com/api/arduinos`)
-            .then(data =>{
-                console.log(data.data);
-                console.log(data.data.piDevice.arduinos);
-                // TODO: Check the deviceId: if not set, set it, if set, make sure it is correct
-                // TODO:  Have it set the schedule and plantName for the one with the associated serial number
-        }).catch(err => {if(err) console.log(err)})
+            .then(data => {
+                log(data.data);
+                let pi = data.data.piDevice;
+                if (!this.deviceId) {
+                    this.deviceId = pi.deviceId;
+                    this.arduinos = pi.arduinos.map(arduino => {
+                        let newArd = new Arduino(arduino.comName, arduino.serialNumber);
+                        newArd.setup();
+                        newArd.setWateringSchedule();
+                        return newArd
+                    });
+                } else if (this.deviceId === pi.deviceId) {
+                    if(this.arduinos) {
+                        this.arduinos.forEach(arduino => arduino.clearWateringSchedule());
+                    }
+                    this.arduinos = pi.arduinos.map(arduino => {
+                        let newArd = new Arduino(arduino.comName, arduino.serialNumber);
+                        newArd.setup();
+                        newArd.setWateringSchedule();
+                        return newArd
+                    });
+                }
+            }).catch(err => {
+                if (err) console.log(err)
+            })
     }
 
     // Loop over all the arduinos and have them return their status with the serial number associated
-    getAllStatus() {
+    reportSensors() {
         if (this.arduinos.length) {
             let data = {};
             this.arduinos.forEach(arduino => {
-                arduino.getAllStatusAndData();
+                arduino.reportSensors();
                 data[arduino.serialNumber] = arduino.data;
             });
             return data;
@@ -58,10 +77,10 @@ class Pi {
 
     // Posts an update to the API and triggers an update event
     updateApi() {
-        let data = {id: this._UID, arduinos:[], status: this.status};
+        let data = {arduinos: [], status: this.status};
         // This parses through the arduino object and only keeps the data that we store on the server
-        if(this.arduinos.length){
-            this.arduinos.forEach(arduino =>{
+        if (this.arduinos) {
+            this.arduinos.forEach(arduino => {
                 data.arduinos.push({
                     comName: arduino.comName ? arduino.comName : null,
                     serialNumber: arduino.serialNumber ? arduino.serialNumber : null,
@@ -74,9 +93,11 @@ class Pi {
             })
         }
         return axios
-            .post(`https://nameless-reef-34646.herokuapp.com/api/updateArduino/`, data)
-            .then(() => this.pusher.trigger() ) // Triggers an update event on the listener
-            .catch(err => {if(err) console.log(err)})
+            .post(`https://nameless-reef-34646.herokuapp.com/api/updateArduinos/`, data)
+            .then() // Triggers an update event on the listener
+            .catch(err => {
+                if (err) console.log(err)
+            })
     }
 
     // Searches for any devices plugged in that are made by arduino, then registers them if they have not been previously registered
@@ -135,12 +156,14 @@ class Pi {
 
     // Primary method that will keep the program running and acting properly
     async run() {
-        await  this.setup();
+        await this.setup();
         this.getUpdate();
         this.pusher = new Pusher(this._UID);
-        this.pusher.subscribe(UID => {if(UID === this._UID) this.getUpdate()});
+        this.pusher.subscribe(UID => {
+            if (UID.id === this._UID) this.getUpdate()
+        });
         this.discovery = setInterval(this.discover, 5000);
-        this.statusChecker = setInterval(this.getAllStatus, 300000);
+        this.statusChecker = setInterval(() => this.reportSensors(), 300000);
     }
 
     // Initial script that will have the user connect to wifi and log in to their account
@@ -196,7 +219,10 @@ class Pi {
 
     _authenticate() {
         return axios
-            .post("https://nameless-reef-34646.herokuapp.com/api/login", {username: this._username, password: this._password})
+            .post("https://nameless-reef-34646.herokuapp.com/api/login", {
+                username: this._username,
+                password: this._password
+            })
             .then(data => {
                 this._UID = data.data.UID;
                 return "Authenticated"
