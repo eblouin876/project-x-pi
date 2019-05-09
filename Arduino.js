@@ -2,6 +2,7 @@ const SerialPort = require("serialport");
 const Readline = require("@serialport/parser-readline");
 const log = require("con-logger");
 const moment = require("moment");
+const Response = require("./Response");
 
 class Arduino {
     /**
@@ -104,15 +105,15 @@ class Arduino {
         return this.version + this.companyId + this.deviceId + cmd
     }
 
-// Method that takes in a response from the arduino and parses it appropriately
-    handleResponse(response) {
-    }
-
 // Method that initializes the serialport and parser. Must be called to initialize setup async
     setup() {
+        this.response = new Response(this.deviceId);
         this.serialPort = new SerialPort(this.comName);
         this.parser = this.serialPort.pipe(new Readline());
-        this.parser.on("data", this.handleResponse);
+        this.parser.on("data", () => {
+            data = this.response.handle()
+        //    TODO: DO SOMETHING WITH THE DATA
+        });
 
         return new Promise((resolve, reject) => {
             let parser = this.serialPort.pipe(new Readline());
