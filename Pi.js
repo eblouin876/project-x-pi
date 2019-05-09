@@ -164,6 +164,10 @@ class Pi {
                 this.arduinos[i].active = false;
                 inactive = true;
             }
+            if(!serials.includes(this.arduinos[i].serialNumber) && this.arduinos[i].active === false) {
+                this.arduinos[i].active = true;
+                inactive = true;
+            }
         }
         if (inactive){
             this.updateApi();
