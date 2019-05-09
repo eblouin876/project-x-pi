@@ -38,6 +38,10 @@ class livePusher {
         channel.bind('update', cb);
         this.channels.push(channel);
     }
+
+    disconnect(){
+        this.pusher.disconnect();
+    }
 }
 
 module.exports = livePusher;

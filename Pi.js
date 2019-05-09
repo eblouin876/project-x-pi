@@ -107,10 +107,13 @@ class Pi {
     async discover() {
         // Stores all ports that are available
         let ports = await SerialPort.list();
+        let serials = [];
         ports.forEach(async port => {
             // Checks to see if the port has a manufacturer and if that manufacturer includes arduino
             if (port.manufacturer && port.manufacturer.split(" ").includes("Arduino")) {
-                // Checks to see if the arduino is already in the array of arduinos
+                // Add the serial number to the list of serials
+                serials.push(port.serialNumber);
+                // Checks to see if the arduino isn't  in the array of arduinos
                 if (!this.arduinos || !this.arduinos.some(arduino => arduino.serialNumber === port.serialNumber)) {
 
                     let newArd = new Arduino(port.comName, port.serialNumber);
@@ -151,8 +154,19 @@ class Pi {
                     }
                 }
             }
-
         });
+        // Check the array of arduinos. If for some reason there is a serial number that was previously registered but is no longer in
+        // Our list of devices, change this.active to false
+        let inactive = false;
+        for(let i = 0; i < this.arduinos.length; i ++){
+            if (!serials.includes(this.arduinos[i].serialNumber)){
+                this.arduinos[i].active = false;
+                inactive = true;
+            }
+        }
+        if (inactive){
+            this.updateApi();
+        }
     }
 
     // Primary method that will keep the program running and acting properly
@@ -163,7 +177,7 @@ class Pi {
         this.pusher.subscribe(UID => {
             if (UID.id === this._UID) this.getUpdate()
         });
-        const discover = this.discover.bind(this)
+        const discover = this.discover.bind(this);
         this.discovery = setInterval(discover, 5000);
         this.statusChecker = setInterval(() => this.reportSensors(), 300000);
     }

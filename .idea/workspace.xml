@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d361287e-2864-4af1-b002-a2cf91b61270" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Arduino.js" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pi.js" beforeDir="false" afterPath="$PROJECT_DIR$/Pi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pusher.js" beforeDir="false" afterPath="$PROJECT_DIR$/Pusher.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -14,101 +17,64 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Pi.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="690">
-                  <caret line="169" column="18" selection-start-line="169" selection-start-column="18" selection-end-line="169" selection-end-column="18" />
-                  <folding>
-                    <element signature="n#!!block;n#constructor#0;n#Pi#0" />
-                    <element signature="n#!!block;n#getUpdate#0;n#Pi#0" />
-                    <element signature="n#!!block;n#getAllStatus#0;n#Pi#0" />
-                    <element signature="n#!!block;n#updateApi#0;n#Pi#0" />
-                    <element signature="e#1434#1458#0" />
-                    <element signature="n#!!block;n#discover#0;n#Pi#0" />
-                    <element signature="e#4342#5442#0" />
-                    <element signature="e#4481#5322#0" />
-                    <element signature="n#!!block;n#run#0;n#Pi#0" />
-                    <element signature="n#!!block;n#setup#0;n#Pi#0" />
-                    <element signature="n#!!block;n#_setupWifi#0;n#Pi#0" />
-                    <element signature="n#!!block;n#_authenticate#0;n#Pi#0" />
-                    <element signature="n#!!block;n#_authenticate#0;n#Pi#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Pusher.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="69">
-                  <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
-                  <folding>
-                    <element signature="n#livePusher#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/Response.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="368">
-                  <caret line="91" column="1" lean-forward="true" selection-start-line="91" selection-start-column="1" selection-end-line="91" selection-end-column="1" />
-                  <folding>
-                    <element signature="n#!!block;n#constructor#0;n#Response#0" />
-                    <element signature="n#!!block;n#handle#0;n#Response#0" />
-                    <element signature="n#!!block;n#_parseResponse#0;n#Response#0" />
-                    <element signature="n#!!block;n#_getData#0;n#Response#0" />
-                    <element signature="n#!!block;n#_parseConfig#0;n#Response#0" />
-                    <element signature="n#!!block;n#_verifyChecksum#0;n#Response#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/scratchPad.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="332">
-                  <caret line="33" column="44" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
-                  <folding>
-                    <element signature="n#!!doc" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/Arduino.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="115">
-                  <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-                  <folding>
-                    <element signature="n#!!block;n#setWateringSchedule#0;n#Arduino#0" />
-                    <element signature="n#!!block;n#clearWateringSchedule#0;n#Arduino#0" />
-                    <element signature="n#!!block;n#reportSensors#0;n#Arduino#0" />
-                    <element signature="n#!!block;n#startWater#0;n#Arduino#0" />
-                    <element signature="n#!!block;n#stopWater#0;n#Arduino#0" />
-                    <element signature="n#!!block;n#setDeviceId#0;n#Arduino#0" />
-                    <element signature="n#!!block;n#getSystemConfig#0;n#Arduino#0" />
-                    <element signature="n#!!block;n#_generateChecksum#0;n#Arduino#0" />
-                    <element signature="n#!!block;n#setup#0;n#Arduino#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Pi.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="260">
+              <caret line="163" column="32" selection-start-line="163" selection-start-column="32" selection-end-line="163" selection-end-column="32" />
+              <folding>
+                <element signature="n#!!block;n#constructor#0;n#Pi#0" />
+                <element signature="e#4832#5735#0" />
+                <element signature="e#6087#7119#0" />
+                <element signature="n#!!block;n#_setupWifi#0;n#Pi#0" />
+                <element signature="n#!!block;n#_authenticate#0;n#Pi#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Arduino.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="421">
+              <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
+              <folding>
+                <element signature="n#!!block;n#clearWateringSchedule#0;n#Arduino#0" />
+                <element signature="n#!!block;n#reportSensors#0;n#Arduino#0" />
+                <element signature="n#!!block;n#startWater#0;n#Arduino#0" />
+                <element signature="n#!!block;n#stopWater#0;n#Arduino#0" />
+                <element signature="n#!!block;n#setDeviceId#0;n#Arduino#0" />
+                <element signature="n#!!block;n#getSystemConfig#0;n#Arduino#0" />
+                <element signature="n#!!block;n#_generateChecksum#0;n#Arduino#0" />
+                <element signature="n#!!block;n#setup#0;n#Arduino#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Pusher.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="356">
+              <caret line="42" column="33" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scratchPad.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="759">
+              <caret line="33" column="44" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -125,6 +91,7 @@
       <find>updateArduinos</find>
       <find>updateApi</find>
       <find>a test</find>
+      <find>pusher</find>
     </findStrings>
     <replaceStrings>
       <replace>_</replace>
@@ -137,10 +104,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Pusher.js" />
         <option value="$PROJECT_DIR$/scratchPad.js" />
-        <option value="$PROJECT_DIR$/Arduino.js" />
         <option value="$PROJECT_DIR$/Response.js" />
+        <option value="$PROJECT_DIR$/Pusher.js" />
+        <option value="$PROJECT_DIR$/Arduino.js" />
         <option value="$PROJECT_DIR$/Pi.js" />
       </list>
     </option>
@@ -204,12 +171,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1557165818999</updated>
-      <workItem from="1557165820341" duration="39905000" />
+      <workItem from="1557165820341" duration="43401000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39905000" />
+    <option name="totallyTimeSpent" value="43401000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -220,7 +187,7 @@
       <window_info id="Project Explorer" />
       <window_info id="Job Explorer" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.24969475" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24969475" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Console" />
       <window_info anchor="bottom" id="DB Execution Console" />
@@ -246,48 +213,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Pi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="169" column="18" selection-start-line="169" selection-start-column="18" selection-end-line="169" selection-end-column="18" />
-          <folding>
-            <element signature="n#!!block;n#constructor#0;n#Pi#0" />
-            <element signature="n#!!block;n#getUpdate#0;n#Pi#0" />
-            <element signature="n#!!block;n#getAllStatus#0;n#Pi#0" />
-            <element signature="n#!!block;n#updateApi#0;n#Pi#0" />
-            <element signature="e#1434#1458#0" />
-            <element signature="n#!!block;n#discover#0;n#Pi#0" />
-            <element signature="e#4342#5442#0" />
-            <element signature="e#4481#5322#0" />
-            <element signature="n#!!block;n#run#0;n#Pi#0" />
-            <element signature="n#!!block;n#setup#0;n#Pi#0" />
-            <element signature="n#!!block;n#_setupWifi#0;n#Pi#0" />
-            <element signature="n#!!block;n#_authenticate#0;n#Pi#0" />
-            <element signature="n#!!block;n#_authenticate#0;n#Pi#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scratchPad.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="33" column="44" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Pusher.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
-          <folding>
-            <element signature="n#livePusher#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Response.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
@@ -303,12 +228,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scratchPad.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="759">
+          <caret line="33" column="44" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pusher.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="42" column="33" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Arduino.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="421">
+          <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
           <folding>
-            <element signature="n#!!block;n#setWateringSchedule#0;n#Arduino#0" />
             <element signature="n#!!block;n#clearWateringSchedule#0;n#Arduino#0" />
             <element signature="n#!!block;n#reportSensors#0;n#Arduino#0" />
             <element signature="n#!!block;n#startWater#0;n#Arduino#0" />
@@ -317,6 +258,20 @@
             <element signature="n#!!block;n#getSystemConfig#0;n#Arduino#0" />
             <element signature="n#!!block;n#_generateChecksum#0;n#Arduino#0" />
             <element signature="n#!!block;n#setup#0;n#Arduino#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="163" column="32" selection-start-line="163" selection-start-column="32" selection-end-line="163" selection-end-column="32" />
+          <folding>
+            <element signature="n#!!block;n#constructor#0;n#Pi#0" />
+            <element signature="e#4832#5735#0" />
+            <element signature="e#6087#7119#0" />
+            <element signature="n#!!block;n#_setupWifi#0;n#Pi#0" />
+            <element signature="n#!!block;n#_authenticate#0;n#Pi#0" />
           </folding>
         </state>
       </provider>
