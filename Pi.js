@@ -40,7 +40,7 @@ class Pi {
                 if (!this.deviceId) {
                     this.deviceId = pi.deviceId;
                     this.arduinos = pi.arduinos.map(arduino => {
-                        let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName);
+                        let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
                         newArd.setup();
                         newArd.setWateringSchedule();
                         newArd.reportSensors();
@@ -51,7 +51,7 @@ class Pi {
                         this.arduinos.forEach(arduino => arduino.clearWateringSchedule());
                     }
                     this.arduinos = pi.arduinos.map(arduino => {
-                        let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName);
+                        let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
                         newArd.setup();
                         newArd.setWateringSchedule();
                         newArd.reportSensors();
@@ -90,7 +90,8 @@ class Pi {
                     schedule: arduino.schedule ? arduino.schedule : null,
                     plantName: arduino.plantName ? arduino.plantName : null,
                     status: arduino.status ? arduino.status : null,
-                    data: arduino.data ? arduino.data : null
+                    data: arduino.data ? arduino.data : null,
+                    active: arduino.active ? arduino.active : false
                 })
             })
         }

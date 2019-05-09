@@ -11,7 +11,7 @@ class Arduino {
      * @param {String} serialNumber Unique serial number of the device that is created by the manufacturer
      * @param {String} deviceId assigned by the rPi
      */
-    constructor(comName, serialNumber, deviceId, schedule, plantName) {
+    constructor(comName, serialNumber, deviceId, schedule, plantName, active) {
         this.comName = comName;
         this.serialNumber = serialNumber;
         this.plantName = plantName ? plantName : "";
@@ -25,7 +25,7 @@ class Arduino {
         this.data;
         this.version = 1;
         this.companyId = 123;
-        this.active = true;
+        this.active = active ? active : true;
     }
 
     // Method that sets the watering schedule whenever a new schedule comes in from the database
