@@ -169,7 +169,7 @@ class Pi {
     // Initial script that will have the user connect to wifi and log in to their account
     async setup() {
         wifi.init({iface: null});
-        // await this._setupWifi();
+        // await this._setupWifi(); TODO: Don't forget to turn this on for production
         await this._getCredentials();
         await this._authenticate();
     }
