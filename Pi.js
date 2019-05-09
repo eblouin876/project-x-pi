@@ -122,7 +122,7 @@ class Pi {
                     // Set the deviceId of the new arduino
                     log(this)
                     if (this.arduinos.length) {
-                        newArd.setDeviceId(this.arduinos[this.arduinos.length - 1].deviceId + 1);
+                        newArd.setDeviceId(parseInt(this.arduinos[this.arduinos.length - 1].deviceId) + 1);
                     } else {
                         newArd.setDeviceId(1);
                     }
