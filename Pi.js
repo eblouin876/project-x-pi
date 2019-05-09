@@ -22,7 +22,7 @@ class Pi {
         // The interceptor adds the user to the header object in the request if authentication has occurred properly
         this.interceptor = axios.interceptors.request.use((config) => {
             if (this._UID) {
-                config.headers = {user: this._UID};
+                config.headers = { user: this._UID };
             }
             return config;
         }, (error) => {
@@ -47,7 +47,7 @@ class Pi {
                         return newArd
                     });
                 } else if (this.deviceId === pi.deviceId) {
-                    if(this.arduinos) {
+                    if (this.arduinos) {
                         this.arduinos.forEach(arduino => arduino.clearWateringSchedule());
                     }
                     this.arduinos = pi.arduinos.map(arduino => {
@@ -79,7 +79,7 @@ class Pi {
 
     // Posts an update to the API and triggers an update event
     updateApi() {
-        let data = {arduinos: [], status: this.status};
+        let data = { arduinos: [], status: this.status };
         // This parses through the arduino object and only keeps the data that we store on the server
         if (this.arduinos) {
             this.arduinos.forEach(arduino => {
@@ -120,6 +120,7 @@ class Pi {
                         return;
                     }
                     // Set the deviceId of the new arduino
+                    log(this)
                     if (this.arduinos.length) {
                         newArd.setDeviceId(this.arduinos[this.arduinos.length - 1].deviceId + 1);
                     } else {
@@ -162,13 +163,14 @@ class Pi {
         this.pusher.subscribe(UID => {
             if (UID.id === this._UID) this.getUpdate()
         });
-        this.discovery = setInterval(this.discover, 5000);
+        const discover = this.discover.bind(this)
+        this.discovery = setInterval(discover, 5000);
         this.statusChecker = setInterval(() => this.reportSensors(), 300000);
     }
 
     // Initial script that will have the user connect to wifi and log in to their account
     async setup() {
-        wifi.init({iface: null});
+        wifi.init({ iface: null });
         // await this._setupWifi(); TODO: Don't forget to turn this on for production
         await this._getCredentials();
         await this._authenticate();
@@ -191,7 +193,7 @@ class Pi {
             type: "password"
         });
 
-        let wifiLogin = {ssid: ssid.data, password: wifiPwd.data};
+        let wifiLogin = { ssid: ssid.data, password: wifiPwd.data };
 
         return wifi.connect(wifiLogin, async err => {
             if (err) {

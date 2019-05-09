@@ -90,3 +90,5 @@ class Response {
         return checkSum === tmpSum;
     }
 }
+
+module.exports = Response;
