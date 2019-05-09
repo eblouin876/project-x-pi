@@ -40,9 +40,10 @@ class Pi {
                 if (!this.deviceId) {
                     this.deviceId = pi.deviceId;
                     this.arduinos = pi.arduinos.map(arduino => {
-                        let newArd = new Arduino(arduino.comName, arduino.serialNumber);
+                        let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName);
                         newArd.setup();
                         newArd.setWateringSchedule();
+                        newArd.reportSensors();
                         return newArd
                     });
                 } else if (this.deviceId === pi.deviceId) {
@@ -50,9 +51,10 @@ class Pi {
                         this.arduinos.forEach(arduino => arduino.clearWateringSchedule());
                     }
                     this.arduinos = pi.arduinos.map(arduino => {
-                        let newArd = new Arduino(arduino.comName, arduino.serialNumber);
+                        let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName);
                         newArd.setup();
                         newArd.setWateringSchedule();
+                        newArd.reportSensors();
                         return newArd
                     });
                 }
@@ -115,16 +117,14 @@ class Pi {
                     // Setup is called seperately so that we can await properly. It will break after 60 seconds of inactivity and set discover to false
                     let setup = await newArd.setup();
                     if (setup === "timeout") {
-                        this.discovery = false;
                         return;
                     }
                     // Set the deviceId of the new arduino
                     if (this.arduinos.length) {
-                        newArd.deviceId = this.arduinos[this.arduinos.length - 1].deviceId + 1;
+                        newArd.setDeviceId(this.arduinos[this.arduinos.length - 1].deviceId + 1);
                     } else {
-                        newArd.deviceId = 1;
+                        newArd.setDeviceId(1);
                     }
-                    newArd.setDeviceId();
                     // Add the arduinos to the local set of devices
                     this.arduinos.push(newArd);
                     this.updateApi();

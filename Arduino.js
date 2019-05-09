@@ -1,73 +1,114 @@
-SerialPort = require("serialport");
-Readline = require("@serialport/parser-readline");
-log = require("con-logger");
+const SerialPort = require("serialport");
+const Readline = require("@serialport/parser-readline");
+const log = require("con-logger");
+const moment = require("moment");
 
 class Arduino {
     /**
-     * 
+     *
      * @param {String} comName Address of the comport the device is connected to
      * @param {String} serialNumber Unique serial number of the device that is created by the manufacturer
+     * @param {String} deviceId assigned by the rPi
      */
-    constructor(comName, serialNumber) {
+    constructor(comName, serialNumber, deviceId, schedule, plantName) {
         this.comName = comName;
         this.serialNumber = serialNumber;
-        this.plantName = "";
-        this.schedule = {};
-        this.deviceId = "";
+        this.plantName = plantName ? plantName : "";
+        this.schedule = schedule ? schedule : [];
+        this.deviceId = deviceId ? deviceId : 0;
         this.serialPort;
         this.parser;
         this.status = 2; // 0 is good, 1 is error, 2 is unassigned
         this.waterOnTimers = [];
         this.waterOffTimers = [];
         this.data;
+        this.version = 1;
+        this.companyId = 123;
     }
 
     // Method that sets the watering schedule whenever a new schedule comes in from the database
     // Will clear previous timers, take in the object, parse it, and  set intervals based on the input
-    setWateringSchedule(){ }
+    setWateringSchedule() {
+        const week = 604800000;
+        const conversion = 100; // TODO: This needs to be our conversion factor from cup to time in ms
+        this.schedule.forEach(waterInstance => {
+                let time = waterInstance.day + waterInstance.time;
+                let duration = waterInstance.amount * conversion;
+                let timeUntil = moment.duration(moment(time, "ddd hh:mm").diff(moment())).asMilliseconds();
+                if (timeUntil < 0) {
+                    timeUntil = week + timeUntil;
+                }
+                setTimeout(() => {
+                    this.waterOnTimers.push(setInterval(() => {
+                        this.startWater();
+                    }, week))
+                }, timeUntil);
+                setTimeout(() => {
+                    this.waterOffTimers.push(setInterval(() => {
+                        this.stopWater();
+                    }, week))
+                }, timeUntil + duration);
+            }
+        )
+    }
 
-    // Clears the watering schedule
+// Clears the watering schedule
     clearWateringSchedule() {
-        for(let i = 0; i < this.waterOnTimers.length; i ++) {
+        for (let i = 0; i < this.waterOnTimers.length; i++) {
             clearInterval(this.waterOnTimers[i])
         }
-        for(let i = 0; i < this.waterOffTimers.length; i++) {
+        for (let i = 0; i < this.waterOffTimers.length; i++) {
             clearInterval(this.waterOffTimers[i])
         }
     }
 
-    // Method that returns the status of all connected devices and their data as an object and updates this.data
-    reportSensors() { }
-
-    // Method that gets the status and data of a specific connected device
-    getStatusAndData(device) {
-        let data = this.reportSensors();
-        switch (device) {
-            case "pump":
-                break;
-            case "temp":
-                break;
-            default:
-                break;
-        }
+// Method that returns the status of all connected devices and their data as an object and updates this.data
+    reportSensors() {
+        let command = 1;
+        let checksum = this._generateChecksum(command);
+        this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}>`)
     }
 
-    // Method to get the overall system status of the devices attached (returns 0 or 1)
-    getStatus() { }
+// Method that sends command to the arduino to turn the pump on
+    startWater() {
+        let command = 3;
+        let checksum = this._generateChecksum(command);
+        this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~1>`)
+    }
 
-    // Method that sends command to the arduino to turn the pump on
-    startWater() { }
+// Method that sends command to the arduino to turn the pump off
+    stopWater() {
+        let command = 3;
+        let checksum = this._generateChecksum(command);
+        this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~0>`)
+    }
 
-    // Method that sends command to the arduino to turn the pump off
-    stopWater() { }
+// Method that sets the deviceId for the arduino based on this.deviceId
+    setDeviceId(DID) {
+        let command = 4;
+        let checksum = this._generateChecksum(command);
+        let deviceId = DID;
+        this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~${deviceId}>`);
+        this.deviceId = deviceId;
+    }
 
-    // Method that sets the deviceId for the arduino based on this.deviceId
-    setDeviceId() {}
+// Method that returns a value (representing the bits) for what sensors are attached
+    getSystemConfig() {
+        let command = 5;
+        let checksum = this._generateChecksum(command);
+        this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}>`)
+    }
 
-    // Method that takes in a response from the arduino and parses it appropriately
-    handleResponse(response) { }
+// Method that generates checksum
+    _generateChecksum(cmd) {
+        return this.version + this.companyId + this.deviceId + cmd
+    }
 
-    // Method that initializes the serialport and parser. Must be called to initialize setup async
+// Method that takes in a response from the arduino and parses it appropriately
+    handleResponse(response) {
+    }
+
+// Method that initializes the serialport and parser. Must be called to initialize setup async
     setup() {
         this.serialPort = new SerialPort(this.comName);
         this.parser = this.serialPort.pipe(new Readline());
@@ -75,11 +116,10 @@ class Arduino {
 
         return new Promise((resolve, reject) => {
             let parser = this.serialPort.pipe(new Readline());
-            let ping = setInterval(() => this.serialPort.write("<status>"), 1000);
-            // TODO: Make sure to add appropriate check status command in place of above
+            let ping = setInterval(() => this.getSystemConfig(), 1000);
             parser.on("data", data => {
                 let dataArr = data.split("~");
-                if (dataArr[0] === "status") {
+                if (dataArr[4] === "5" && dataArr[5] > 0) {
                     this.status = parseInt(dataArr[1]);
                 } else {
                     log(data);
