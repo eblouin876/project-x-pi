@@ -160,7 +160,7 @@ class Pi {
         // Our list of devices, change this.active to false
         let inactive = false;
         for(let i = 0; i < this.arduinos.length; i ++){
-            if (!serials.includes(this.arduinos[i].serialNumber)){
+            if (!serials.includes(this.arduinos[i].serialNumber) && this.arduinos[i].active !== false){
                 this.arduinos[i].active = false;
                 inactive = true;
             }
