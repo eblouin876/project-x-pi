@@ -108,7 +108,7 @@ class Arduino {
     }
 
 // Method that generates checksum
-    _generateChecksum(cmd, data) {
+    _generateChecksum(cmd, data = "0") {
         return parseInt(this.version) + parseInt(this.companyId) + parseInt(this.deviceId) + parseInt(cmd) + parseInt(data);
     }
 
