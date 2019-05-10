@@ -118,9 +118,9 @@ class Arduino {
             this.response = new Response(this.deviceId);
             this.serialPort = new SerialPort(this.comName);
             this.parser = this.serialPort.pipe(new Readline());
-            this.parser.on("data", () => {
-                data = this.response.handle();
-                log(data)
+            this.parser.on("data", (res) => {
+                data = this.response.handle(res);
+                console.log(data)
                 //    TODO: DO SOMETHING WITH THE DATA
             });
 
