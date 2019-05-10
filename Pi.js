@@ -35,6 +35,7 @@ class Pi {
         return axios
             .get(`https://nameless-reef-34646.herokuapp.com/api/arduinos`)
             .then(data => {
+                log(data.data);
                 let pi = data.data.piDevice;
                 console.log("PI OBJECT COMING FROM API", pi);
                 if (!this.deviceId) {
