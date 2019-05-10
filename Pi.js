@@ -40,6 +40,7 @@ class Pi {
                 if (!this.deviceId) {
                     this.deviceId = pi.deviceId;
                     this.arduinos = pi.arduinos.map(arduino => {
+                        log(arduino.active);
                         if (arduino.active) {
                             let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
                             newArd.setup();
