@@ -40,13 +40,13 @@ class Pi {
                 if (!this.deviceId) {
                     this.deviceId = pi.deviceId;
                     this.arduinos = pi.arduinos.map(arduino => {
-                        if(arduino.active) {
-                           let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
-                           newArd.setup();
-                           newArd.setWateringSchedule();
-                           newArd.reportSensors();
-                           return newArd
-                       }
+                        if (arduino.active) {
+                            let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
+                            newArd.setup();
+                            newArd.setWateringSchedule();
+                            newArd.reportSensors();
+                            return newArd
+                        }
                     });
                 } else if (this.deviceId === pi.deviceId) {
                     if (this.arduinos) {
@@ -56,12 +56,12 @@ class Pi {
                         });
                     }
                     this.arduinos = pi.arduinos.map(arduino => {
-                        if(arduino.active){
-                        let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
-                        newArd.setup();
-                        newArd.setWateringSchedule();
-                        newArd.reportSensors();
-                        return newArd
+                        if (arduino.active) {
+                            let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
+                            newArd.setup();
+                            newArd.setWateringSchedule();
+                            newArd.reportSensors();
+                            return newArd
                         }
                     });
                 }
@@ -75,7 +75,7 @@ class Pi {
         if (this.arduinos.length) {
             let data = {};
             this.arduinos.forEach(arduino => {
-                if(arduino.active){
+                if (arduino.active) {
                     arduino.reportSensors();
                     data[arduino.serialNumber] = arduino.data;
                 }
@@ -183,7 +183,7 @@ class Pi {
     // Primary method that will keep the program running and acting properly
     async run() {
         await this.setup();
-        this.getUpdate();
+        await this.getUpdate();
         this.pusher = new Pusher(this._UID);
         this.pusher.subscribe(UID => {
             if (UID.id === this._UID) this.getUpdate()
