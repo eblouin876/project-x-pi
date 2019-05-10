@@ -19,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Pi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
-              <caret line="57" column="40" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
+            <state relative-caret-position="416">
+              <caret line="149" column="26" lean-forward="true" selection-start-line="149" selection-start-column="26" selection-end-line="149" selection-end-column="26" />
               <folding>
                 <element signature="n#!!block;n#constructor#0;n#Pi#0" />
                 <element signature="e#1872#2098#0" />
@@ -28,8 +28,6 @@
                 <element signature="n#!!block;n#reportSensors#0;n#Pi#0" />
                 <element signature="n#!!block;n#updateApi#0;n#Pi#0" />
                 <element signature="e#3223#3932#0" />
-                <element signature="n#!!block;n#discover#0;n#Pi#0" />
-                <element signature="e#5064#5937#0" />
                 <element signature="n#!!block;n#run#0;n#Pi#0" />
                 <element signature="n#!!block;n#setup#0;n#Pi#0" />
                 <element signature="n#!!block;n#_setupWifi#0;n#Pi#0" />
@@ -43,16 +41,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Arduino.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="654">
-              <caret line="142" column="45" lean-forward="true" selection-start-line="142" selection-start-column="45" selection-end-line="142" selection-end-column="45" />
+            <state relative-caret-position="195">
+              <caret line="122" column="47" selection-start-line="122" selection-start-column="47" selection-end-line="122" selection-end-column="47" />
               <folding>
-                <element signature="n#!!block;n#constructor#0;n#Arduino#0" />
                 <element signature="n#!!block;n#setWateringSchedule#0;n#Arduino#0" />
                 <element signature="n#!!block;n#clearWateringSchedule#0;n#Arduino#0" />
                 <element signature="n#!!block;n#reportSensors#0;n#Arduino#0" />
                 <element signature="n#!!block;n#startWater#0;n#Arduino#0" />
                 <element signature="n#!!block;n#stopWater#0;n#Arduino#0" />
-                <element signature="n#!!block;n#setDeviceId#0;n#Arduino#0" />
                 <element signature="n#!!block;n#getSystemConfig#0;n#Arduino#0" />
                 <element signature="n#!!block;n#_generateChecksum#0;n#Arduino#0" />
               </folding>
@@ -122,6 +118,8 @@
       <find>this.response</find>
       <find>setdeviceid</find>
       <find>.setup</find>
+      <find>setDeviceId</find>
+      <find>conso</find>
     </findStrings>
     <replaceStrings>
       <replace>_</replace>
@@ -203,12 +201,12 @@
       <updated>1557165818999</updated>
       <workItem from="1557165820341" duration="45652000" />
       <workItem from="1557452795347" duration="3447000" />
-      <workItem from="1557506481133" duration="7277000" />
+      <workItem from="1557506481133" duration="7832000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56376000" />
+    <option name="totallyTimeSpent" value="56931000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -223,6 +221,33 @@
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25579977" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="DB Browser" order="3" weight="0.32967034" />
+      <window_info id="Project Explorer" order="4" />
+      <window_info id="Job Explorer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.32987553" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32987553" />
+      <window_info anchor="bottom" id="Console" order="7" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="DB Execution Console" order="10" />
+      <window_info anchor="bottom" id="Database Changes" order="11" />
+      <window_info anchor="bottom" id="Terminal" order="12" weight="0.32987553" />
+      <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout>
+    <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25579977" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
@@ -248,7 +273,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
-    </layout>
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -288,16 +313,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Arduino.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="654">
-          <caret line="142" column="45" lean-forward="true" selection-start-line="142" selection-start-column="45" selection-end-line="142" selection-end-column="45" />
+        <state relative-caret-position="195">
+          <caret line="122" column="47" selection-start-line="122" selection-start-column="47" selection-end-line="122" selection-end-column="47" />
           <folding>
-            <element signature="n#!!block;n#constructor#0;n#Arduino#0" />
             <element signature="n#!!block;n#setWateringSchedule#0;n#Arduino#0" />
             <element signature="n#!!block;n#clearWateringSchedule#0;n#Arduino#0" />
             <element signature="n#!!block;n#reportSensors#0;n#Arduino#0" />
             <element signature="n#!!block;n#startWater#0;n#Arduino#0" />
             <element signature="n#!!block;n#stopWater#0;n#Arduino#0" />
-            <element signature="n#!!block;n#setDeviceId#0;n#Arduino#0" />
             <element signature="n#!!block;n#getSystemConfig#0;n#Arduino#0" />
             <element signature="n#!!block;n#_generateChecksum#0;n#Arduino#0" />
           </folding>
@@ -306,8 +329,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Pi.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="57" column="40" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
+        <state relative-caret-position="416">
+          <caret line="149" column="26" lean-forward="true" selection-start-line="149" selection-start-column="26" selection-end-line="149" selection-end-column="26" />
           <folding>
             <element signature="n#!!block;n#constructor#0;n#Pi#0" />
             <element signature="e#1872#2098#0" />
@@ -315,8 +338,6 @@
             <element signature="n#!!block;n#reportSensors#0;n#Pi#0" />
             <element signature="n#!!block;n#updateApi#0;n#Pi#0" />
             <element signature="e#3223#3932#0" />
-            <element signature="n#!!block;n#discover#0;n#Pi#0" />
-            <element signature="e#5064#5937#0" />
             <element signature="n#!!block;n#run#0;n#Pi#0" />
             <element signature="n#!!block;n#setup#0;n#Pi#0" />
             <element signature="n#!!block;n#_setupWifi#0;n#Pi#0" />

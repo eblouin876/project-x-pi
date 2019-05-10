@@ -120,7 +120,7 @@ class Arduino {
             this.parser = this.serialPort.pipe(new Readline());
             this.parser.on("data", (res) => {
                 data = this.response.handle(res);
-                console.log(data)
+                console.log("DATA Arduino:123",data)
                 //    TODO: DO SOMETHING WITH THE DATA
             });
 

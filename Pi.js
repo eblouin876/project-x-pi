@@ -67,7 +67,7 @@ class Pi {
                     });
                     log(this.arduinos);
                 }
-                console.log(this.arduinos);
+                console.log("ARDUINOS pi:70",this.arduinos);
             }).catch(err => {
                 if (err) console.log(err)
             })
@@ -137,8 +137,8 @@ class Pi {
                         return;
                     }
                     // Set the deviceId of the new arduino
-                    console.log(newArd);
-                    if (this.arduinos.length) {
+                    console.log("NEW ARD pi:140", newArd);
+                    if (this.arduinos.length>0) {
                         newArd.setDeviceId(parseInt(this.arduinos[this.arduinos.length - 1].deviceId) + 1);
                     } else {
                         newArd.setDeviceId(1);
