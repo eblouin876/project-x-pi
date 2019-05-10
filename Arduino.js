@@ -42,12 +42,14 @@ class Arduino {
                     timeUntil = week + timeUntil;
                 }
                 setTimeout(() => {
+                    this.startWater();
                     this.waterOnTimers.push(setInterval(() => {
                         log("startingWater");
                         this.startWater();
                     }, week))
                 }, timeUntil);
                 setTimeout(() => {
+                    this.stopWater();
                     this.waterOffTimers.push(setInterval(() => {
                         log("stoppingWater");
                         this.stopWater();
