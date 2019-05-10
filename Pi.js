@@ -124,7 +124,6 @@ class Pi {
                         return;
                     }
                     // Set the deviceId of the new arduino
-                    log(this)
                     if (this.arduinos.length) {
                         newArd.setDeviceId(parseInt(this.arduinos[this.arduinos.length - 1].deviceId) + 1);
                     } else {
@@ -139,18 +138,15 @@ class Pi {
                 else if (this.arduinos && this.arduinos.some(arduino => (arduino.serialNumber === port.serialNumber && arduino.comName !== port.comName))) {
                     for (let i = 0; i < this.arduinos.length; i++) {
                         if (this.arduinos[i].serialNumber === port.serialNumber) {
-                            let newArd = new Arduino(port.comName, port.serialNumber);
+                            let newArd = new Arduino(port.comName, port.serialNumber, this.arduinos[i].deviceId, this.arduinos[i].schedule, this.arduinos[i].plantName, this.arduinos[i].active);
                             // Setup is called seperately so that we can await properly. It will break after 60 seconds of inactivity and set discover to false
                             let setup = await newArd.setup();
                             if (setup === "timeout") {
-                                this.discovery = false;
                                 return;
                             }
-                            newArd.deviceId = this.arduinos[i].deviceId;
-                            newArd.plantName = this.arduinos[i].plantName;
-                            newArd.schedule = this.arduinos[i].schedule;
                             newArd.status = 0;
                             this.arduinos[i] = newArd;
+                            this.updateApi();
                         }
                     }
                 }
@@ -160,16 +156,21 @@ class Pi {
         // Our list of devices, change this.active to false
         let inactive = false;
         for(let i = 0; i < this.arduinos.length; i ++){
+            log("SERIALS:",serials);
+            log("ARDUINO SERIAL:",this.arduinos[i].serialNumber);
             if (!serials.includes(this.arduinos[i].serialNumber) && this.arduinos[i].active !== false){
+                log("FIRST BLOCK");
                 this.arduinos[i].active = false;
                 inactive = true;
             }
             if(serials.includes(this.arduinos[i].serialNumber) && this.arduinos[i].active === false) {
+                log("SECOND BLOCK");
                 this.arduinos[i].active = true;
                 inactive = true;
             }
         }
         if (inactive){
+            log("UPDATED API");
             this.updateApi();
         }
     }
