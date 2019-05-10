@@ -191,6 +191,12 @@ class Pi {
         const discover = this.discover.bind(this);
         this.discovery = setInterval(discover, 5000);
         this.statusChecker = setInterval(() => this.reportSensors(), 5000); // TODO: REMEMBER TO GO BACK TO 300000
+
+    //    TODO: Remeber to turn this off!
+        this.arduinos[0].startWater();
+        this.arduinos[1].startWater();
+        setTimeout(()=>this.arduinos[0].stopWater(),5000)
+        setTimeout(()=>this.arduinos[1].stopWater(),5000)
     }
 
     // Initial script that will have the user connect to wifi and log in to their account
