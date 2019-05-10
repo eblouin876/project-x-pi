@@ -109,7 +109,7 @@ class Arduino {
 
 // Method that generates checksum
     _generateChecksum(cmd, data) {
-        return this.version + this.companyId + this.deviceId + cmd + data;
+        return parseInt(this.version) + parseInt(this.companyId) + parseInt(this.deviceId) + parseInt(cmd) + parseInt(data);
     }
 
 // Method that initializes the serialport and parser. Must be called to initialize setup async
