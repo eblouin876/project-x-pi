@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d361287e-2864-4af1-b002-a2cf91b61270" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pi.js" beforeDir="false" afterPath="$PROJECT_DIR$/Pi.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -19,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Pi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="52" column="54" lean-forward="true" selection-start-line="52" selection-start-column="54" selection-end-line="52" selection-end-column="54" />
+            <state relative-caret-position="691">
+              <caret line="65" column="23" lean-forward="true" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="23" />
               <folding>
                 <element signature="n#!!block;n#constructor#0;n#Pi#0" />
                 <element signature="n#!!block;n#reportSensors#0;n#Pi#0" />
@@ -175,12 +174,12 @@
       <updated>1557165818999</updated>
       <workItem from="1557165820341" duration="45652000" />
       <workItem from="1557452795347" duration="3447000" />
-      <workItem from="1557506481133" duration="1636000" />
+      <workItem from="1557506481133" duration="1929000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50735000" />
+    <option name="totallyTimeSpent" value="51028000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -203,7 +202,7 @@
       <window_info id="Job Explorer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.32987553" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32987553" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -214,7 +213,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="DB Execution Console" order="10" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
-      <window_info anchor="bottom" id="Terminal" order="12" weight="0.32987553" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="12" visible="true" weight="0.32987553" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -276,8 +275,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Pi.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="52" column="54" lean-forward="true" selection-start-line="52" selection-start-column="54" selection-end-line="52" selection-end-column="54" />
+        <state relative-caret-position="691">
+          <caret line="65" column="23" lean-forward="true" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="23" />
           <folding>
             <element signature="n#!!block;n#constructor#0;n#Pi#0" />
             <element signature="n#!!block;n#reportSensors#0;n#Pi#0" />
