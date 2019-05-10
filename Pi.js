@@ -193,10 +193,10 @@ class Pi {
         this.statusChecker = setInterval(() => this.reportSensors(), 5000); // TODO: REMEMBER TO GO BACK TO 300000
 
     //    TODO: Remeber to turn this off!
-        this.arduinos[0].startWater();
-        this.arduinos[1].startWater();
-        setTimeout(()=>this.arduinos[0].stopWater(),5000)
-        setTimeout(()=>this.arduinos[1].stopWater(),5000)
+        setTimeout(()=>this.arduinos[0].startWater(), 5000);
+        setTimeout(()=>this.arduinos[1].startWater(), 5000);
+        setTimeout(()=>this.arduinos[0].stopWater(),10000);
+        setTimeout(()=>this.arduinos[1].stopWater(),10000);
     }
 
     // Initial script that will have the user connect to wifi and log in to their account
