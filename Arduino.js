@@ -74,7 +74,7 @@ class Arduino {
 // Method that sends command to the arduino to turn the pump on
     startWater() {
         let command = 3;
-        let checksum = this._generateChecksum(command);
+        let checksum = this._generateChecksum(command, 1);
         this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~1>`)
     }
 
@@ -102,8 +102,8 @@ class Arduino {
     }
 
 // Method that generates checksum
-    _generateChecksum(cmd) {
-        return this.version + this.companyId + this.deviceId + cmd
+    _generateChecksum(cmd, data) {
+        return this.version + this.companyId + this.deviceId + cmd + data;
     }
 
 // Method that initializes the serialport and parser. Must be called to initialize setup async

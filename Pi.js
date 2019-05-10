@@ -35,15 +35,16 @@ class Pi {
         return axios
             .get(`https://nameless-reef-34646.herokuapp.com/api/arduinos`)
             .then(data => {
-                log(data.data);
                 let pi = data.data.piDevice;
                 if (!this.deviceId) {
                     this.deviceId = pi.deviceId;
                     this.arduinos = pi.arduinos.map(arduino => {
                         let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
                         newArd.setup();
-                        newArd.setWateringSchedule();
-                        newArd.reportSensors();
+                        if(arduino.active){
+                            newArd.setWateringSchedule();
+                            newArd.reportSensors();
+                        }
                         return newArd
                     });
                 } else if (this.deviceId === pi.deviceId) {
@@ -54,11 +55,12 @@ class Pi {
                         });
                     }
                     this.arduinos = pi.arduinos.map(arduino => {
-                        log(arduino.active);
                         let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
                         newArd.setup();
-                        newArd.setWateringSchedule();
-                        newArd.reportSensors();
+                        if(arduino.active){
+                            newArd.setWateringSchedule();
+                            newArd.reportSensors();
+                        }
                         return newArd
                     });
                     log(this.arduinos);
