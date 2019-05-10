@@ -108,37 +108,39 @@ class Arduino {
 
 // Method that initializes the serialport and parser. Must be called to initialize setup async
     setup() {
-        this.response = new Response(this.deviceId);
-        this.serialPort = new SerialPort(this.comName);
-        this.parser = this.serialPort.pipe(new Readline());
-        this.parser.on("data", () => {
-            data = this.response.handle();
-            log(data)
-        //    TODO: DO SOMETHING WITH THE DATA
-        });
-
-        return new Promise((resolve, reject) => {
-            let parser = this.serialPort.pipe(new Readline());
-            let ping = setInterval(() => this.getSystemConfig(), 1000);
-            parser.on("data", data => {
-                let dataArr = data.split("~");
-                if (dataArr[4] === "5" && dataArr[5] > 0) {
-                    this.status = parseInt(dataArr[1]);
-                } else {
-                    log(data);
-                }
+        if(this.active){
+            this.response = new Response(this.deviceId);
+            this.serialPort = new SerialPort(this.comName);
+            this.parser = this.serialPort.pipe(new Readline());
+            this.parser.on("data", () => {
+                data = this.response.handle();
+                log(data)
+                //    TODO: DO SOMETHING WITH THE DATA
             });
 
-            let check = setInterval(() => {
-                if (this.status > 0) {
-                    clearInterval(check);
-                    clearInterval(ping);
-                    resolve(0);
-                }
-            }, 500);
+            return new Promise((resolve, reject) => {
+                let parser = this.serialPort.pipe(new Readline());
+                let ping = setInterval(() => this.getSystemConfig(), 1000);
+                parser.on("data", data => {
+                    let dataArr = data.split("~");
+                    if (dataArr[4] === "5" && dataArr[5] > 0) {
+                        this.status = parseInt(dataArr[1]);
+                    } else {
+                        log(data);
+                    }
+                });
 
-            setTimeout(() => reject("timeout"), 5000);
-        })
+                let check = setInterval(() => {
+                    if (this.status > 0) {
+                        clearInterval(check);
+                        clearInterval(ping);
+                        resolve(0);
+                    }
+                }, 500);
+
+                setTimeout(() => reject("timeout"), 5000);
+            })
+        }
     }
 }
 
