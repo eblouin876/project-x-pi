@@ -134,6 +134,7 @@ class Pi {
                         return;
                     }
                     // Set the deviceId of the new arduino
+                    console.log(newArd);
                     if (this.arduinos.length) {
                         newArd.setDeviceId(parseInt(this.arduinos[this.arduinos.length - 1].deviceId) + 1);
                     } else {
