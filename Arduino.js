@@ -78,20 +78,26 @@ class Arduino {
     startWater() {
         let command = 3;
         let checksum = this._generateChecksum(command, 1);
+        let DID = this.deviceId;
+        this.deviceId=255;
         log(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~1>`);
         if(this.serialPort) {
             this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~1>`)
         }
+        this.deviceId = DID;
     }
 
 // Method that sends command to the arduino to turn the pump off
     stopWater() {
         let command = 3;
         let checksum = this._generateChecksum(command, 0);
+        let DID = this.deviceId;
+        this.deviceId=255;
         log(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~0>`);
         if(this.serialPort) {
             this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~0>`)
         }
+        this.deviceId = DID;
     }
 
 // Method that sets the deviceId for the arduino based on this.deviceId
