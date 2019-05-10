@@ -77,27 +77,21 @@ class Arduino {
 // Method that sends command to the arduino to turn the pump on
     startWater() {
         let command = 3;
-        let checksum = this._generateChecksum(command, 1);
-        let DID = this.deviceId;
-        this.deviceId=255;
+        let checksum = this._generateChecksum(command, 1,255);
         log(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~1>`);
         if(this.serialPort) {
-            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~1>`)
+            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${255}~${command}~1>`)
         }
-        this.deviceId = DID;
     }
 
 // Method that sends command to the arduino to turn the pump off
     stopWater() {
         let command = 3;
-        let checksum = this._generateChecksum(command, 0);
-        let DID = this.deviceId;
-        this.deviceId=255;
+        let checksum = this._generateChecksum(command, 0,255);
         log(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~0>`);
         if(this.serialPort) {
-            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~0>`)
+            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${255}~${command}~0>`)
         }
-        this.deviceId = DID;
     }
 
 // Method that sets the deviceId for the arduino based on this.deviceId
@@ -124,8 +118,8 @@ class Arduino {
     }
 
 // Method that generates checksum
-    _generateChecksum(cmd, data = "0") {
-        return parseInt(this.version) + parseInt(this.companyId) + parseInt(this.deviceId) + parseInt(cmd) + parseInt(data);
+    _generateChecksum(cmd, data = "0", deviceId = "255") {
+        return parseInt(this.version) + parseInt(this.companyId) + parseInt(deviceId) + parseInt(cmd) + parseInt(data);
     }
 
 // Method that initializes the serialport and parser. Must be called to initialize setup async
