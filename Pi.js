@@ -36,9 +36,11 @@ class Pi {
             .get(`https://nameless-reef-34646.herokuapp.com/api/arduinos`)
             .then(data => {
                 let pi = data.data.piDevice;
+                console.log("PI OBJECT COMING FROM API", pi);
                 if (!this.deviceId) {
                     this.deviceId = pi.deviceId;
                     this.arduinos = pi.arduinos.map(async arduino => {
+                        log(pi);
                         let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
                         let setup = await newArd.setup();
                         log(setup);
@@ -127,7 +129,7 @@ class Pi {
                 // Add the serial number to the list of serials
                 serials.push(port.serialNumber);
                 // Checks to see if the arduino isn't  in the array of arduinos
-                if (!this.arduinos || !this.arduinos.some(arduino => arduino.serialNumber === port.serialNumber)) {
+                if (this.arduinos.length < 1 || !this.arduinos.some(arduino => arduino.serialNumber === port.serialNumber)) {
 
                     let newArd = new Arduino(port.comName, port.serialNumber);
                     // Setup is called seperately so that we can await properly. It will break after 60 seconds of inactivity and set discover to false
@@ -145,6 +147,7 @@ class Pi {
                     }
                     // Add the arduinos to the local set of devices
                     this.arduinos.push(newArd);
+                    log("Updated api");
                     this.updateApi();
                 }
                 // If the serial number  has been registered to a different comPort in the past, reassign it to the new one
@@ -161,6 +164,7 @@ class Pi {
                             }
                             newArd.status = 0;
                             this.arduinos[i] = newArd;
+                            log("updated api");
                             this.updateApi();
                         }
                     }
@@ -181,6 +185,7 @@ class Pi {
             }
         }
         if (inactive) {
+            log("updated api");
             this.updateApi();
         }
     }
@@ -191,8 +196,8 @@ class Pi {
         await this.setup();
         await this.getUpdate();
         this.pusher = new Pusher(this._UID);
-        this.pusher.subscribe(UID => {
-            if (UID.id === this._UID) this.getUpdate()
+        this.pusher.subscribe(async UID => {
+            if (UID.id === this._UID) await this.getUpdate()
         });
         const discover = this.discover.bind(this);
         this.discovery = setInterval(discover, 5000);
