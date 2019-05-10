@@ -34,6 +34,7 @@ class Arduino {
         const week = 604800000;
         const conversion = 100; // TODO: This needs to be our conversion factor from cup to time in ms
         this.schedule.forEach(waterInstance => {
+            log("Schedule set");
                 let time = waterInstance.day + waterInstance.time;
                 let duration = waterInstance.amount * conversion;
                 let timeUntil = moment.duration(moment(time, "ddd hh:mm").diff(moment())).asMilliseconds();
@@ -42,11 +43,13 @@ class Arduino {
                 }
                 setTimeout(() => {
                     this.waterOnTimers.push(setInterval(() => {
+                        log("startingWater");
                         this.startWater();
                     }, week))
                 }, timeUntil);
                 setTimeout(() => {
                     this.waterOffTimers.push(setInterval(() => {
+                        log("stoppingWater");
                         this.stopWater();
                     }, week))
                 }, timeUntil + duration);
