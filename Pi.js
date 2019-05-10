@@ -192,7 +192,7 @@ class Pi {
         });
         const discover = this.discover.bind(this);
         this.discovery = setInterval(discover, 5000);
-        this.statusChecker = setInterval(() => this.reportSensors(), 300000);
+        this.statusChecker = setInterval(() => this.reportSensors(), 5000); // TODO: CHANGE BACK TO 300000
     }
 
     // Initial script that will have the user connect to wifi and log in to their account
