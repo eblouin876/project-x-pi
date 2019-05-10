@@ -40,13 +40,11 @@ class Pi {
                 if (!this.deviceId) {
                     this.deviceId = pi.deviceId;
                     this.arduinos = pi.arduinos.map(arduino => {
-                        if (arduino.active) {
-                            let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
-                            newArd.setup();
-                            newArd.setWateringSchedule();
-                            newArd.reportSensors();
-                            return newArd
-                        }
+                        let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
+                        newArd.setup();
+                        newArd.setWateringSchedule();
+                        newArd.reportSensors();
+                        return newArd
                     });
                 } else if (this.deviceId === pi.deviceId) {
                     if (this.arduinos) {
@@ -57,13 +55,11 @@ class Pi {
                     }
                     this.arduinos = pi.arduinos.map(arduino => {
                         log(arduino.active);
-                        if (arduino.active) {
-                            let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
-                            newArd.setup();
-                            newArd.setWateringSchedule();
-                            newArd.reportSensors();
-                            return newArd
-                        }
+                        let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
+                        newArd.setup();
+                        newArd.setWateringSchedule();
+                        newArd.reportSensors();
+                        return newArd
                     });
                     log(this.arduinos);
                 }
