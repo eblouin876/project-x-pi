@@ -147,7 +147,9 @@ class Arduino {
                 setTimeout(() => reject("timeout"), 5000);
             })
         }
+
     }
+
 }
 
 module.exports = Arduino;

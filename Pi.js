@@ -39,13 +39,11 @@ class Pi {
                 let pi = data.data.piDevice;
                 if (!this.deviceId) {
                     this.deviceId = pi.deviceId;
-                    this.arduinos = pi.arduinos.map(async arduino => {
+                    this.arduinos = pi.arduinos.map(arduino => {
                         let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
-                        await newArd.setup();
-                        if (newArd.active) {
-                            newArd.setWateringSchedule();
-                            newArd.reportSensors();
-                        }
+                        newArd.setup();
+                        newArd.setWateringSchedule();
+                        newArd.reportSensors();
                         return newArd
                     });
                 } else if (this.deviceId === pi.deviceId) {
@@ -55,13 +53,11 @@ class Pi {
                             arduino.serialPort.close()
                         });
                     }
-                    this.arduinos = pi.arduinos.map(async arduino => {
+                    this.arduinos = pi.arduinos.map(arduino => {
                         let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
-                        await newArd.setup();
-                        if (newArd.active) {
-                            newArd.setWateringSchedule();
-                            newArd.reportSensors();
-                        }
+                        newArd.setup();
+                        newArd.setWateringSchedule();
+                        newArd.reportSensors();
                         return newArd
                     });
                 }
@@ -75,7 +71,7 @@ class Pi {
         if (this.arduinos.length) {
             let data = {};
             this.arduinos.forEach(arduino => {
-                if (arduino.active) {
+                if(arduino.active){
                     arduino.reportSensors();
                     data[arduino.serialNumber] = arduino.data;
                 }
