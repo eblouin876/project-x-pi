@@ -69,7 +69,9 @@ class Arduino {
         let command = 1;
         let checksum = this._generateChecksum(command);
         log(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}>`);
-        this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}>`)
+        if(this.serialPort) {
+            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}>`)
+        }
     }
 
 // Method that sends command to the arduino to turn the pump on
@@ -77,7 +79,9 @@ class Arduino {
         let command = 3;
         let checksum = this._generateChecksum(command, 1);
         log(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~1>`);
-        this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~1>`)
+        if(this.serialPort) {
+            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~1>`)
+        }
     }
 
 // Method that sends command to the arduino to turn the pump off
@@ -85,7 +89,9 @@ class Arduino {
         let command = 3;
         let checksum = this._generateChecksum(command, 0);
         log(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~0>`);
-        this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~0>`)
+        if(this.serialPort) {
+            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~0>`)
+        }
     }
 
 // Method that sets the deviceId for the arduino based on this.deviceId
@@ -95,8 +101,10 @@ class Arduino {
         let checksum = this._generateChecksum(command, DID);
         let deviceId = DID;
         log(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~${deviceId}>`);
-        this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~${deviceId}>`);
+        if(this.serialPort) {
+            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~${deviceId}>`);
         this.deviceId = deviceId;
+        }
     }
 
 // Method that returns a value (representing the bits) for what sensors are attached
@@ -104,7 +112,9 @@ class Arduino {
         let command = 5;
         let checksum = this._generateChecksum(command);
         log(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}>`);
-        this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}>`)
+        if(this.serialPort) {
+            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}>`)
+        }
     }
 
 // Method that generates checksum
