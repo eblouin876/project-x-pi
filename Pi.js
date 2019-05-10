@@ -42,8 +42,10 @@ class Pi {
                     this.arduinos = pi.arduinos.map(arduino => {
                         let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
                         newArd.setup();
+                        if(arduino.active){
                         newArd.setWateringSchedule();
                         newArd.reportSensors();
+                        }
                         return newArd
                     });
                 } else if (this.deviceId === pi.deviceId) {
@@ -56,8 +58,10 @@ class Pi {
                     this.arduinos = pi.arduinos.map(arduino => {
                         let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
                         newArd.setup();
+                        if(arduino.active){
                         newArd.setWateringSchedule();
                         newArd.reportSensors();
+                        }
                         return newArd
                     });
                 }
@@ -163,6 +167,7 @@ class Pi {
         for (let i = 0; i < this.arduinos.length; i++) {
             if (!serials.includes(this.arduinos[i].serialNumber) && this.arduinos[i].active !== false) {
                 this.arduinos[i].active = false;
+                this.arduinos[i].serialPort.close();
                 inactive = true;
             }
             if (serials.includes(this.arduinos[i].serialNumber) && this.arduinos[i].active === false) {
@@ -186,7 +191,7 @@ class Pi {
         });
         const discover = this.discover.bind(this);
         this.discovery = setInterval(discover, 5000);
-        this.statusChecker = setInterval(() => this.reportSensors(), 300000);
+        this.statusChecker = setInterval(() => this.reportSensors(), 5000); // TODO: REMEMBER TO GO BACK TO 300000
     }
 
     // Initial script that will have the user connect to wifi and log in to their account
