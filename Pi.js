@@ -65,6 +65,7 @@ class Pi {
                     });
                     log(this.arduinos);
                 }
+                log(this.arduinos);
             }).catch(err => {
                 if (err) console.log(err)
             })
