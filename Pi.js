@@ -48,7 +48,10 @@ class Pi {
                     });
                 } else if (this.deviceId === pi.deviceId) {
                     if (this.arduinos) {
-                        this.arduinos.forEach(arduino => arduino.clearWateringSchedule());
+                        this.arduinos.forEach(arduino => {
+                            arduino.clearWateringSchedule();
+                            arduino.serialPort.close()
+                        });
                     }
                     this.arduinos = pi.arduinos.map(arduino => {
                         let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
@@ -68,8 +71,10 @@ class Pi {
         if (this.arduinos.length) {
             let data = {};
             this.arduinos.forEach(arduino => {
-                arduino.reportSensors();
-                data[arduino.serialNumber] = arduino.data;
+                if(arduino.active){
+                    arduino.reportSensors();
+                    data[arduino.serialNumber] = arduino.data;
+                }
             });
             return data;
         } else {
