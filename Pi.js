@@ -251,17 +251,6 @@ class Pi {
                 return await this._authenticate();
             })
     }
-
-    testRoute() {
-        axios
-            .post("https://nameless-reef-34646.herokuapp.com/api/updateArduino", {
-                deviceId: "1",
-                schedule: [{day: "friday", time: "17:00", amount: "1"}],
-                plantName: "ficus"
-            })
-            .then(data => console.log(data))
-            .catch(err => console.log(err));
-    }
 }
 
 module.exports = Pi;
