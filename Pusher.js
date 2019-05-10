@@ -32,7 +32,7 @@ class livePusher {
         console.log("subscribed");
         let pusher = new PusherClient('b48dc9f2091a8e7665e9', {
             cluster: 'us3',
-            forceTLS: true
+            encrypted: true
         });
         let channel = pusher.subscribe('project-x');
         channel.bind('update', cb);
