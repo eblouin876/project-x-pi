@@ -22,7 +22,7 @@ class Pi {
         // The interceptor adds the user to the header object in the request if authentication has occurred properly
         this.interceptor = axios.interceptors.request.use((config) => {
             if (this._UID) {
-                config.headers = { user: this._UID };
+                config.headers = {user: this._UID};
             }
             return config;
         }, (error) => {
@@ -79,7 +79,7 @@ class Pi {
 
     // Posts an update to the API and triggers an update event
     updateApi() {
-        let data = { arduinos: [], status: this.status };
+        let data = {arduinos: [], status: this.status};
         // This parses through the arduino object and only keeps the data that we store on the server
         if (this.arduinos) {
             this.arduinos.forEach(arduino => {
@@ -155,25 +155,21 @@ class Pi {
         // Check the array of arduinos. If for some reason there is a serial number that was previously registered but is no longer in
         // Our list of devices, change this.active to false
         let inactive = false;
-        for(let i = 0; i < this.arduinos.length; i ++){
-            log("SERIALS:",serials);
-            log("ARDUINO SERIAL:",this.arduinos[i].serialNumber);
-            if (!serials.includes(this.arduinos[i].serialNumber) && this.arduinos[i].active !== false){
-                log("FIRST BLOCK");
+        for (let i = 0; i < this.arduinos.length; i++) {
+            if (!serials.includes(this.arduinos[i].serialNumber) && this.arduinos[i].active !== false) {
                 this.arduinos[i].active = false;
                 inactive = true;
             }
-            if(serials.includes(this.arduinos[i].serialNumber) && this.arduinos[i].active === false) {
-                log("SECOND BLOCK");
+            if (serials.includes(this.arduinos[i].serialNumber) && this.arduinos[i].active === false) {
                 this.arduinos[i].active = true;
                 inactive = true;
             }
         }
-        if (inactive){
-            log("UPDATED API");
+        if (inactive) {
             this.updateApi();
         }
     }
+
 
     // Primary method that will keep the program running and acting properly
     async run() {
@@ -190,7 +186,7 @@ class Pi {
 
     // Initial script that will have the user connect to wifi and log in to their account
     async setup() {
-        wifi.init({ iface: null });
+        wifi.init({iface: null});
         // await this._setupWifi(); TODO: Don't forget to turn this on for production
         await this._getCredentials();
         await this._authenticate();
@@ -213,7 +209,7 @@ class Pi {
             type: "password"
         });
 
-        let wifiLogin = { ssid: ssid.data, password: wifiPwd.data };
+        let wifiLogin = {ssid: ssid.data, password: wifiPwd.data};
 
         return wifi.connect(wifiLogin, async err => {
             if (err) {
@@ -254,6 +250,17 @@ class Pi {
                 await this._getCredentials();
                 return await this._authenticate();
             })
+    }
+
+    testRoute() {
+        axios
+            .post("https://nameless-reef-34646.herokuapp.com/api/updateArduino", {
+                deviceId: "1",
+                schedule: [{day: "friday", time: "17:00", amount: "1"}],
+                plantName: "ficus"
+            })
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
     }
 }
 

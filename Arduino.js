@@ -25,7 +25,7 @@ class Arduino {
         this.data;
         this.version = 1;
         this.companyId = 123;
-        this.active = active ? active : true;
+        this.active = !active ? active : true;
     }
 
     // Method that sets the watering schedule whenever a new schedule comes in from the database
