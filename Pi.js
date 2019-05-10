@@ -37,18 +37,13 @@ class Pi {
             .then(data => {
                 log(data.data);
                 let pi = data.data.piDevice;
-                console.log("PI OBJECT COMING FROM API", pi);
                 if (!this.deviceId) {
                     this.deviceId = pi.deviceId;
-                    this.arduinos = pi.arduinos.map(async arduino => {
-                        log(pi);
+                    this.arduinos = pi.arduinos.map(arduino => {
                         let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
-                        let setup = await newArd.setup();
-                        log(setup);
-                        if(arduino.active){
-                            newArd.setWateringSchedule();
-                            newArd.reportSensors();
-                        }
+                        newArd.setup();
+                        newArd.setWateringSchedule();
+                        newArd.reportSensors();
                         return newArd
                     });
                 } else if (this.deviceId === pi.deviceId) {
@@ -58,19 +53,14 @@ class Pi {
                             arduino.serialPort.close()
                         });
                     }
-                    this.arduinos = pi.arduinos.map(async arduino => {
+                    this.arduinos = pi.arduinos.map(arduino => {
                         let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
-                        let setup = await newArd.setup();
-                        log(setup);
-                        if(arduino.active){
-                            newArd.setWateringSchedule();
-                            newArd.reportSensors();
-                        }
+                        newArd.setup();
+                        newArd.setWateringSchedule();
+                        newArd.reportSensors();
                         return newArd
                     });
-                    log(this.arduinos);
                 }
-                console.log("ARDUINOS pi:70",this.arduinos);
             }).catch(err => {
                 if (err) console.log(err)
             })
@@ -81,7 +71,7 @@ class Pi {
         if (this.arduinos.length) {
             let data = {};
             this.arduinos.forEach(arduino => {
-                if (arduino.active) {
+                if(arduino.active){
                     arduino.reportSensors();
                     data[arduino.serialNumber] = arduino.data;
                 }
@@ -130,25 +120,22 @@ class Pi {
                 // Add the serial number to the list of serials
                 serials.push(port.serialNumber);
                 // Checks to see if the arduino isn't  in the array of arduinos
-                if (this.arduinos.length < 1 || !this.arduinos.some(arduino => arduino.serialNumber === port.serialNumber)) {
+                if (!this.arduinos || !this.arduinos.some(arduino => arduino.serialNumber === port.serialNumber)) {
 
                     let newArd = new Arduino(port.comName, port.serialNumber);
                     // Setup is called seperately so that we can await properly. It will break after 60 seconds of inactivity and set discover to false
                     let setup = await newArd.setup();
-                    log(setup);
                     if (setup === "timeout") {
                         return;
                     }
                     // Set the deviceId of the new arduino
-                    console.log("NEW ARD pi:140", newArd);
-                    if (this.arduinos.length>0) {
+                    if (this.arduinos.length) {
                         newArd.setDeviceId(parseInt(this.arduinos[this.arduinos.length - 1].deviceId) + 1);
                     } else {
                         newArd.setDeviceId(1);
                     }
                     // Add the arduinos to the local set of devices
                     this.arduinos.push(newArd);
-                    log("Updated api");
                     this.updateApi();
                 }
                 // If the serial number  has been registered to a different comPort in the past, reassign it to the new one
@@ -159,13 +146,11 @@ class Pi {
                             let newArd = new Arduino(port.comName, port.serialNumber, this.arduinos[i].deviceId, this.arduinos[i].schedule, this.arduinos[i].plantName, this.arduinos[i].active);
                             // Setup is called seperately so that we can await properly. It will break after 60 seconds of inactivity and set discover to false
                             let setup = await newArd.setup();
-                            log(setup);
                             if (setup === "timeout") {
                                 return;
                             }
                             newArd.status = 0;
                             this.arduinos[i] = newArd;
-                            log("updated api");
                             this.updateApi();
                         }
                     }
@@ -186,7 +171,6 @@ class Pi {
             }
         }
         if (inactive) {
-            log("updated api");
             this.updateApi();
         }
     }
@@ -197,12 +181,12 @@ class Pi {
         await this.setup();
         await this.getUpdate();
         this.pusher = new Pusher(this._UID);
-        this.pusher.subscribe(async UID => {
-            if (UID.id === this._UID) await this.getUpdate()
+        this.pusher.subscribe(UID => {
+            if (UID.id === this._UID) this.getUpdate()
         });
         const discover = this.discover.bind(this);
         this.discovery = setInterval(discover, 5000);
-        this.statusChecker = setInterval(() => this.reportSensors(), 5000); // TODO: CHANGE BACK TO 300000
+        this.statusChecker = setInterval(() => this.reportSensors(), 300000);
     }
 
     // Initial script that will have the user connect to wifi and log in to their account
