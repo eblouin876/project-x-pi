@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d361287e-2864-4af1-b002-a2cf91b61270" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Arduino.js" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pi.js" beforeDir="false" afterPath="$PROJECT_DIR$/Pi.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -15,21 +16,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Pi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="474">
-              <caret line="194" column="70" selection-start-line="194" selection-start-column="70" selection-end-line="194" selection-end-column="70" />
+            <state relative-caret-position="444">
+              <caret line="57" column="40" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
               <folding>
                 <element signature="n#!!block;n#constructor#0;n#Pi#0" />
-                <element signature="e#1273#1790#0" />
                 <element signature="e#1872#2098#0" />
                 <element signature="e#2234#2662#0" />
                 <element signature="n#!!block;n#reportSensors#0;n#Pi#0" />
                 <element signature="n#!!block;n#updateApi#0;n#Pi#0" />
                 <element signature="e#3223#3932#0" />
-                <element signature="e#6289#7197#0" />
-                <element signature="e#7504#7915#0" />
+                <element signature="n#!!block;n#discover#0;n#Pi#0" />
+                <element signature="e#5064#5937#0" />
+                <element signature="n#!!block;n#run#0;n#Pi#0" />
                 <element signature="n#!!block;n#setup#0;n#Pi#0" />
                 <element signature="n#!!block;n#_setupWifi#0;n#Pi#0" />
                 <element signature="n#!!block;n#_getCredentials#0;n#Pi#0" />
@@ -42,8 +43,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Arduino.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="389">
-              <caret line="130" column="29" selection-start-line="130" selection-start-column="29" selection-end-line="130" selection-end-column="29" />
+            <state relative-caret-position="654">
+              <caret line="142" column="45" lean-forward="true" selection-start-line="142" selection-start-column="45" selection-end-line="142" selection-end-column="45" />
               <folding>
                 <element signature="n#!!block;n#constructor#0;n#Arduino#0" />
                 <element signature="n#!!block;n#setWateringSchedule#0;n#Arduino#0" />
@@ -59,7 +60,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Response.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="368">
@@ -120,6 +121,7 @@
       <find>this.serialPort</find>
       <find>this.response</find>
       <find>setdeviceid</find>
+      <find>.setup</find>
     </findStrings>
     <replaceStrings>
       <replace>_</replace>
@@ -135,8 +137,8 @@
         <option value="$PROJECT_DIR$/Response.js" />
         <option value="$PROJECT_DIR$/scratchPad.js" />
         <option value="$PROJECT_DIR$/Pusher.js" />
-        <option value="$PROJECT_DIR$/Pi.js" />
         <option value="$PROJECT_DIR$/Arduino.js" />
+        <option value="$PROJECT_DIR$/Pi.js" />
       </list>
     </option>
   </component>
@@ -201,12 +203,12 @@
       <updated>1557165818999</updated>
       <workItem from="1557165820341" duration="45652000" />
       <workItem from="1557452795347" duration="3447000" />
-      <workItem from="1557506481133" duration="6741000" />
+      <workItem from="1557506481133" duration="7277000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55840000" />
+    <option name="totallyTimeSpent" value="56376000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -269,32 +271,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Pi.js">
+    <entry file="file://$PROJECT_DIR$/Response.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="194" column="70" selection-start-line="194" selection-start-column="70" selection-end-line="194" selection-end-column="70" />
+        <state relative-caret-position="368">
+          <caret line="91" column="1" lean-forward="true" selection-start-line="91" selection-start-column="1" selection-end-line="91" selection-end-column="1" />
           <folding>
-            <element signature="n#!!block;n#constructor#0;n#Pi#0" />
-            <element signature="e#1273#1790#0" />
-            <element signature="e#1872#2098#0" />
-            <element signature="e#2234#2662#0" />
-            <element signature="n#!!block;n#reportSensors#0;n#Pi#0" />
-            <element signature="n#!!block;n#updateApi#0;n#Pi#0" />
-            <element signature="e#3223#3932#0" />
-            <element signature="e#6289#7197#0" />
-            <element signature="e#7504#7915#0" />
-            <element signature="n#!!block;n#setup#0;n#Pi#0" />
-            <element signature="n#!!block;n#_setupWifi#0;n#Pi#0" />
-            <element signature="n#!!block;n#_getCredentials#0;n#Pi#0" />
-            <element signature="n#!!block;n#_authenticate#0;n#Pi#0" />
+            <element signature="n#!!block;n#constructor#0;n#Response#0" />
+            <element signature="n#!!block;n#handle#0;n#Response#0" />
+            <element signature="n#!!block;n#_parseResponse#0;n#Response#0" />
+            <element signature="n#!!block;n#_getData#0;n#Response#0" />
+            <element signature="n#!!block;n#_parseConfig#0;n#Response#0" />
+            <element signature="n#!!block;n#_verifyChecksum#0;n#Response#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Arduino.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="130" column="29" selection-start-line="130" selection-start-column="29" selection-end-line="130" selection-end-column="29" />
+        <state relative-caret-position="654">
+          <caret line="142" column="45" lean-forward="true" selection-start-line="142" selection-start-column="45" selection-end-line="142" selection-end-column="45" />
           <folding>
             <element signature="n#!!block;n#constructor#0;n#Arduino#0" />
             <element signature="n#!!block;n#setWateringSchedule#0;n#Arduino#0" />
@@ -309,17 +304,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Response.js">
+    <entry file="file://$PROJECT_DIR$/Pi.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="91" column="1" lean-forward="true" selection-start-line="91" selection-start-column="1" selection-end-line="91" selection-end-column="1" />
+        <state relative-caret-position="444">
+          <caret line="57" column="40" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
           <folding>
-            <element signature="n#!!block;n#constructor#0;n#Response#0" />
-            <element signature="n#!!block;n#handle#0;n#Response#0" />
-            <element signature="n#!!block;n#_parseResponse#0;n#Response#0" />
-            <element signature="n#!!block;n#_getData#0;n#Response#0" />
-            <element signature="n#!!block;n#_parseConfig#0;n#Response#0" />
-            <element signature="n#!!block;n#_verifyChecksum#0;n#Response#0" />
+            <element signature="n#!!block;n#constructor#0;n#Pi#0" />
+            <element signature="e#1872#2098#0" />
+            <element signature="e#2234#2662#0" />
+            <element signature="n#!!block;n#reportSensors#0;n#Pi#0" />
+            <element signature="n#!!block;n#updateApi#0;n#Pi#0" />
+            <element signature="e#3223#3932#0" />
+            <element signature="n#!!block;n#discover#0;n#Pi#0" />
+            <element signature="e#5064#5937#0" />
+            <element signature="n#!!block;n#run#0;n#Pi#0" />
+            <element signature="n#!!block;n#setup#0;n#Pi#0" />
+            <element signature="n#!!block;n#_setupWifi#0;n#Pi#0" />
+            <element signature="n#!!block;n#_getCredentials#0;n#Pi#0" />
+            <element signature="n#!!block;n#_authenticate#0;n#Pi#0" />
           </folding>
         </state>
       </provider>

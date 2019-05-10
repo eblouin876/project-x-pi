@@ -38,9 +38,10 @@ class Pi {
                 let pi = data.data.piDevice;
                 if (!this.deviceId) {
                     this.deviceId = pi.deviceId;
-                    this.arduinos = pi.arduinos.map(arduino => {
+                    this.arduinos = pi.arduinos.map(async arduino => {
                         let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
-                        newArd.setup();
+                        let setup = await newArd.setup();
+                        log(setup);
                         if(arduino.active){
                             newArd.setWateringSchedule();
                             newArd.reportSensors();
@@ -54,9 +55,10 @@ class Pi {
                             arduino.serialPort.close()
                         });
                     }
-                    this.arduinos = pi.arduinos.map(arduino => {
+                    this.arduinos = pi.arduinos.map(async arduino => {
                         let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
-                        newArd.setup();
+                        let setup = await newArd.setup();
+                        log(setup);
                         if(arduino.active){
                             newArd.setWateringSchedule();
                             newArd.reportSensors();
@@ -130,6 +132,7 @@ class Pi {
                     let newArd = new Arduino(port.comName, port.serialNumber);
                     // Setup is called seperately so that we can await properly. It will break after 60 seconds of inactivity and set discover to false
                     let setup = await newArd.setup();
+                    log(setup);
                     if (setup === "timeout") {
                         return;
                     }
@@ -152,6 +155,7 @@ class Pi {
                             let newArd = new Arduino(port.comName, port.serialNumber, this.arduinos[i].deviceId, this.arduinos[i].schedule, this.arduinos[i].plantName, this.arduinos[i].active);
                             // Setup is called seperately so that we can await properly. It will break after 60 seconds of inactivity and set discover to false
                             let setup = await newArd.setup();
+                            log(setup);
                             if (setup === "timeout") {
                                 return;
                             }

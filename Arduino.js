@@ -128,7 +128,6 @@ class Arduino {
                 let parser = this.serialPort.pipe(new Readline());
                 let ping = setInterval(() => this.getSystemConfig(), 1000);
                 parser.on("data", data => {
-                    log(data)
                     let dataArr = data.split("~");
                     if (dataArr[4] === "5" && dataArr[5] > 0) {
                         this.status = parseInt(dataArr[1]);
@@ -141,7 +140,7 @@ class Arduino {
                     if (this.status > 0) {
                         clearInterval(check);
                         clearInterval(ping);
-                        resolve(0);
+                        resolve(this.status);
                     }
                 }, 500);
 
