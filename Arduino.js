@@ -68,9 +68,9 @@ class Arduino {
     reportSensors() {
         let command = 1;
         let checksum = this._generateChecksum(command);
-        log(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}>`);
+        log(`<${checksum}~${this.version}~${this.companyId}~255~${command}>`);
         if(this.serialPort) {
-            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}>`)
+            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~255~${command}>`)
         }
     }
 
@@ -78,32 +78,30 @@ class Arduino {
     startWater() {
         let command = 3;
         let checksum = this._generateChecksum(command, 1,255);
-        log(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~1>`);
+        log(`<${checksum}~${this.version}~${this.companyId}~255~${command}~1>`);
         if(this.serialPort) {
-            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${255}~${command}~1>`)
+            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~255~${command}~1>`)
         }
     }
 
 // Method that sends command to the arduino to turn the pump off
     stopWater() {
         let command = 3;
-        let checksum = this._generateChecksum(command, 0,255);
-        log(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~0>`);
+        let checksum = this._generateChecksum(command, 0);
+        log(`<${checksum}~${this.version}~${this.companyId}~255~${command}~0>`);
         if(this.serialPort) {
-            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${255}~${command}~0>`)
+            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~255~${command}~0>`)
         }
     }
 
 // Method that sets the deviceId for the arduino based on this.deviceId
     setDeviceId(DID) {
         let command = 4;
-        this.deviceId = 255;
         let checksum = this._generateChecksum(command, DID);
         let deviceId = DID;
-        log(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~${deviceId}>`);
+        log(`<${checksum}~${this.version}~${this.companyId}~255~${command}~${deviceId}>`);
         if(this.serialPort) {
-            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}~${deviceId}>`);
-        this.deviceId = deviceId;
+            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~255~${command}~${deviceId}>`);
         }
     }
 
@@ -111,14 +109,16 @@ class Arduino {
     getSystemConfig() {
         let command = 5;
         let checksum = this._generateChecksum(command);
-        log(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}>`);
+        log(`<${checksum}~${this.version}~${this.companyId}~255~${command}>`);
         if(this.serialPort) {
-            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~${this.deviceId}~${command}>`)
+            this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~255~${command}>`)
         }
     }
 
 // Method that generates checksum
-    _generateChecksum(cmd, data = "0", deviceId = "255") {
+    _generateChecksum(cmd, data, deviceId) {
+        data = data ? data : "0";
+        deviceId = deviceId ? deviceId : "255";
         return parseInt(this.version) + parseInt(this.companyId) + parseInt(deviceId) + parseInt(cmd) + parseInt(data);
     }
 
