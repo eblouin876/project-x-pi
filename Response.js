@@ -6,6 +6,12 @@ class Response {
         this.version = 1;
     }
 
+    /**
+     *
+     * @param {String} response The string returned from the arduino to be parsed
+     * @description Main method  that handles  parsing and returning the data from  the arduino
+     * @returns {string|*|string}
+     */
     handle(response) {
         if (!this._verifyChecksum(response)) return "Checksum Error";
         let respArr = this._parseResponse(response);
@@ -16,12 +22,15 @@ class Response {
 
     // Method that parses the response and returns it as an array
     _parseResponse(response) {
-        const respArr = response.split("~");
+        // Removes the first < and generates an array  splitting at the ~
+        const respArr = response.splice(1).split("~");
+        // If the response contains data, it  makes an array out of the data
         if (respArr.length > 7) {
             let data = [];
             for (let i = 7; i < respArr.length - 7; i++) {
                 data.push(respArr[i])
             }
+            // truncates the initial array and adds the data array to the end of it
             respArr.length = 7;
             respArr.push(data);
         }
@@ -52,6 +61,7 @@ class Response {
         let dataIndex = 0;
         let parsedData = {};
         for (let i = 0; i < 8; i++) {
+            // Bit sifts through config and checks each of the bytes
             if (config && (1 << i)) {
                 switch (1 << i) {
                     case 1:
@@ -84,9 +94,13 @@ class Response {
 
     // Method that verifies the checksum to make sure it is correct
     _verifyChecksum(response) {
-        let respArr = response.split("~").map(a => parseInt(a));
+        //  Removes the first < character, splits to an array, and makes all values an int
+        let respArr = response.slice(1).split("~").map(a => parseInt(a));
+        // removes the checksum from the array
         let checkSum = respArr.shift();
+        // sums the remaining values in the array and stores as a temporary sum
         let tmpSum = respArr.reduce((a, b) => a + b);
+        // returns a boolean checking the checkSum and tmpSum against each other
         return checkSum === tmpSum;
     }
 }
