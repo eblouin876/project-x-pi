@@ -32,7 +32,7 @@ class Arduino {
     // Will clear previous timers, take in the object, parse it, and  set intervals based on the input
     setWateringSchedule() {
         const week = 604800000;
-        const conversion = 100; // TODO: This needs to be our conversion factor from cup to time in ms
+        const conversion = 132000; // Based on 1c per 2min 12sec (1cup/132000milliseconds)
         this.schedule.forEach(waterInstance => {
             log("Schedule set");
                 let time = waterInstance.day + waterInstance.time;
