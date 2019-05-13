@@ -159,9 +159,10 @@ class Arduino {
             this.parser.on("data", (res) => {
                 // Sends the data to the response handler to parse and send back
                 data = this.response.handle(res);
-                console.log("DATA Arduino:123", data)
+                console.log("DATA Arduino:162", data)
                 // TODO: DO SOMETHING WITH THE DATA
             });
+            this.serialPort.on('data', data => console.log("SerialPort 165:",data));
             // Returns a promise that resolves if it gets a ping back from the arduino and rejects after a 5s timeout
             return new Promise((resolve, reject) => {
                 // Sets a new instance of the listener that handles this specific case

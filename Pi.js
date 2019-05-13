@@ -200,6 +200,13 @@ class Pi {
         this.discovery = setInterval(discover, 5000);
         // Has the report sensors method run every 30 seconds - if there is an error, it should handle it.
         this.statusChecker = setInterval(() => this.reportSensors(), 300000); //TODO: This just returns data, doesn't yet do anything with it. Error handling should go here
+    //    TODO: REMOVE AFTER TESTING
+        setInterval(() => this.reportSensors(), 300000);
+        this.arduinos.forEach(arduino => {
+            arduino.startWater()
+            setTimeout(()=> arduino.stopWater(), 5000);
+        });
+
     }
 
     // Initial script that will have the user connect to wifi and log in to their account
