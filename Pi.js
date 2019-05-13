@@ -37,6 +37,13 @@ class Pi {
                 // Tun this block if the device ID hasn't been set yet (to associate it with the account)
                 if (!this.deviceId) {
                     this.deviceId = pi.deviceId;
+                    // Clears the watering schedules set for the previous arduinos
+                    if (this.arduinos) {
+                        for (let i =0; i<this.arduinos.length; i++){
+                            this.arduinos[i].clearWateringSchedule();
+                            this.arduinos[i].serialPort.close();
+                        }
+                    }
                     // Rebuild the array of arduinos present with what is pulled from the database
                     this.arduinos = pi.arduinos.map(arduino => {
                         let newArd = new Arduino(arduino.comName, arduino.serialNumber, arduino.deviceId, arduino.schedule, arduino.plantName, arduino.active);
@@ -51,10 +58,10 @@ class Pi {
                 } else if (this.deviceId === pi.deviceId) {
                     // Clears the watering schedules set for the previous arduinos
                     if (this.arduinos) {
-                        this.arduinos.forEach(arduino => {
-                            arduino.clearWateringSchedule();
-                            arduino.serialPort.close()
-                        });
+                        for (let i =0; i<this.arduinos.length; i++){
+                            this.arduinos[i].clearWateringSchedule();
+                            this.arduinos[i].serialPort.close();
+                        }
                     }
                     // Rebuild the array of arduinos present with what is pulled from the database
                     this.arduinos = pi.arduinos.map(arduino => {
