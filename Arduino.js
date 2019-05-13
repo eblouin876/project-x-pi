@@ -25,7 +25,7 @@ class Arduino {
         this.status = 2; // 0 is good, 1 is error, 2 is unassigned
         this.waterOnTimers = []; // Holds the timers that turn the water on
         this.waterOffTimers = []; // Holds the timers that turn the water off
-        this.data; // Will hold the data that is returned from the devices attached to the arduino
+        this.data = {}; // Will hold the data that is returned from the devices attached to the arduino
         this.version = 1;
         this.companyId = 123;
         this.active = active;
@@ -89,6 +89,12 @@ class Arduino {
         if (this.serialPort) {
             this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~255~${command}>`)
         }
+        return new Promise((resolve, reject) => {
+            let data = this.data;
+            setTimeout(()=>reject("Timeout Error"), 5000);
+            while(JSON.stringify(data) === JSON.stringify(this.data)){}
+            resolve(this.data);
+        })
     }
 
 // Method that sends command to the arduino to turn the pump on
@@ -170,6 +176,7 @@ class Arduino {
                         console.log("ARDUINO 170:",this.command);
                         let data = this.response.handle(this.command);
                         this.status = data[0];
+                        this.data = data[1];
                         console.log("ARDUINO DATA 172:",data)
                     }
                 }

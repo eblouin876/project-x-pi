@@ -76,12 +76,11 @@ class Pi {
     reportSensors() {
         if (this.arduinos.length) {
             let data = {};
-            this.arduinos.forEach(arduino => {
+            this.arduinos.forEach(async arduino => {
                 // Checks that the arduino is flagged active
                 if (arduino.active) {
-                    // Has the arduino ask its sensors for data (stored in arduino.data
-                    arduino.reportSensors();
-                    data[arduino.serialNumber] = arduino.data;
+                    // Has the arduino ask its sensors for data (stored in arduino.data)
+                    data[arduino.serialNumber] = await arduino.reportSensors();
                 }
             });
             return data;
@@ -201,7 +200,7 @@ class Pi {
         // Has the report sensors method run every 30 seconds - if there is an error, it should handle it.
         this.statusChecker = setInterval(() => this.reportSensors(), 300000); //TODO: This just returns data, doesn't yet do anything with it. Error handling should go here
     //    TODO: REMOVE AFTER TESTING
-        setInterval(() => this.reportSensors(), 5000);
+        setInterval(() => log(this.reportSensors()), 5000);
     }
 
     // Initial script that will have the user connect to wifi and log in to their account
