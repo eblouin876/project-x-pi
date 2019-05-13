@@ -210,7 +210,7 @@ class Pi {
         this.statusChecker = setInterval(() => {
             this.reportSensors();
             setTimeout(()=>this.updateApi(), 2000);
-        }, 300000); //TODO: This just returns data, doesn't yet do anything with it. Error handling should go here
+        }, 5000); //TODO: This just returns data, doesn't yet do anything with it. Error handling should go here
     }
 
     // Initial script that will have the user connect to wifi and log in to their account
