@@ -100,7 +100,7 @@ class Response {
         // removes the checksum from the array
         let checkSum = respArr.shift();
         // sums the remaining values in the array and stores as a temporary sum
-        let tmpSum = respArr.reduce((a, b) =>{ if(a) return parseInt(a) + b});
+        let tmpSum = respArr.reduce((a, b) =>{ if(b) return parseInt(a) + parseInt(b)});
         // returns a boolean checking the checkSum and tmpSum against each other
         return [checkSum === tmpSum, checkSum, tmpSum];
     }

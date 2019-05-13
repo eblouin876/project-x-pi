@@ -61,8 +61,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Response.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="103" column="80" lean-forward="true" selection-start-line="103" selection-start-column="80" selection-end-line="103" selection-end-column="80" />
+            <state relative-caret-position="488">
+              <caret line="108" column="26" lean-forward="true" selection-start-line="108" selection-start-column="26" selection-end-line="108" selection-end-column="26" />
               <folding>
                 <element signature="n#!!block;n#constructor#0;n#Response#0" />
                 <element signature="n#!!doc;n#handle#0;n#Response#0" />
@@ -211,7 +211,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64109000" />
+    <option name="totallyTimeSpent" value="64280000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -349,8 +349,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Response.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="103" column="80" lean-forward="true" selection-start-line="103" selection-start-column="80" selection-end-line="103" selection-end-column="80" />
+        <state relative-caret-position="488">
+          <caret line="108" column="26" lean-forward="true" selection-start-line="108" selection-start-column="26" selection-end-line="108" selection-end-column="26" />
           <folding>
             <element signature="n#!!block;n#constructor#0;n#Response#0" />
             <element signature="n#!!doc;n#handle#0;n#Response#0" />
