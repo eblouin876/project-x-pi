@@ -40,8 +40,10 @@ class Pi {
                     // Clears the watering schedules set for the previous arduinos
                     if (this.arduinos) {
                         for (let i =0; i<this.arduinos.length; i++){
-                            this.arduinos[i].clearWateringSchedule();
-                            this.arduinos[i].serialPort.close();
+                            if(this.arduinos[i].active) {
+                                this.arduinos[i].clearWateringSchedule();
+                                this.arduinos[i].serialPort.close();
+                            }
                         }
                     }
                     // Rebuild the array of arduinos present with what is pulled from the database
@@ -59,8 +61,10 @@ class Pi {
                     // Clears the watering schedules set for the previous arduinos
                     if (this.arduinos) {
                         for (let i =0; i<this.arduinos.length; i++){
-                            this.arduinos[i].clearWateringSchedule();
-                            this.arduinos[i].serialPort.close();
+                            if(this.arduinos[i].active) {
+                                this.arduinos[i].clearWateringSchedule();
+                                this.arduinos[i].serialPort.close();
+                            }
                         }
                     }
                     // Rebuild the array of arduinos present with what is pulled from the database
@@ -210,7 +214,7 @@ class Pi {
         this.statusChecker = setInterval(() => {
             this.reportSensors();
             setTimeout(()=>this.updateApi(), 2000);
-        }, 5000); //TODO: This just returns data, doesn't yet do anything with it. Error handling should go here
+        }, 300000); //TODO: This just returns data, doesn't yet do anything with it. Error handling should go here
     }
 
     // Initial script that will have the user connect to wifi and log in to their account
