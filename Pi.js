@@ -42,7 +42,7 @@ class Pi {
                         for (let i =0; i<this.arduinos.length; i++){
                             if(this.arduinos[i].active) {
                                 this.arduinos[i].clearWateringSchedule();
-                                this.arduinos[i].serialPort.close();
+                                if(this.arduinos[i].serialPort) this.arduinos[i].serialPort.close();
                             }
                         }
                     }
@@ -63,7 +63,7 @@ class Pi {
                         for (let i =0; i<this.arduinos.length; i++){
                             if(this.arduinos[i].active) {
                                 this.arduinos[i].clearWateringSchedule();
-                                this.arduinos[i].serialPort.close();
+                                if(this.arduinos[i].serialPort) this.arduinos[i].serialPort.close();
                             }
                         }
                     }

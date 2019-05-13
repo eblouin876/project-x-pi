@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d361287e-2864-4af1-b002-a2cf91b61270" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Pi.js" beforeDir="false" afterPath="$PROJECT_DIR$/Pi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scratchPad.js" beforeDir="false" afterPath="$PROJECT_DIR$/scratchPad.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -18,14 +19,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Pi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="216" column="14" selection-start-line="216" selection-start-column="14" selection-end-line="216" selection-end-column="14" />
+            <state relative-caret-position="323">
+              <caret line="65" column="64" selection-start-line="65" selection-start-column="64" selection-end-line="65" selection-end-column="64" />
               <folding>
                 <element signature="n#!!block;n#constructor#0;n#Pi#0" />
                 <element signature="n#!!block;n#reportSensors#0;n#Pi#0" />
                 <element signature="n#!!block;n#updateApi#0;n#Pi#0" />
                 <element signature="e#3444#4095#0" />
+                <element signature="n#!!block;n#discover#0;n#Pi#0" />
+                <element signature="e#4929#7385#0" />
                 <element signature="e#5238#6111#0" />
+                <element signature="e#6463#7371#0" />
                 <element signature="n#!!block;n#setup#0;n#Pi#0" />
                 <element signature="n#!!block;n#_setupWifi#0;n#Pi#0" />
                 <element signature="n#!!block;n#_getCredentials#0;n#Pi#0" />
@@ -38,8 +42,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Arduino.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="948">
-              <caret line="184" column="40" selection-start-line="184" selection-start-column="36" selection-end-line="184" selection-end-column="40" />
+            <state relative-caret-position="186">
+              <caret line="88" column="64" selection-start-line="88" selection-start-column="64" selection-end-line="88" selection-end-column="64" />
               <folding>
                 <element signature="n#!!doc;n#constructor#0;n#Arduino#0" />
                 <element signature="n#!!block;n#constructor#0;n#Arduino#0" />
@@ -54,8 +58,8 @@
                 <element signature="n#!!block;n#clearWateringSchedule#0;n#Arduino#0" />
                 <element signature="e#2611#2671#0" />
                 <element signature="e#2733#2794#0" />
-                <element signature="n#!!block;n#reportSensors#0;n#Arduino#0" />
                 <element signature="e#3121#3232#0" />
+                <element signature="e#4945#4969#0" />
                 <element signature="e#5148#5188#0" />
                 <element signature="n#!!block;n#startWater#0;n#Arduino#0" />
                 <element signature="e#3520#3633#0" />
@@ -105,8 +109,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scratchPad.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="446">
-              <caret line="32" column="1" lean-forward="true" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
+            <state relative-caret-position="-7">
+              <caret line="23" column="22" lean-forward="true" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -139,6 +143,8 @@
       <find>log(</find>
       <find>log(`&lt;</find>
       <find>timeout</find>
+      <find>console.log</find>
+      <find>.close()</find>
     </findStrings>
     <replaceStrings>
       <replace>_</replace>
@@ -153,9 +159,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Pusher.js" />
-        <option value="$PROJECT_DIR$/scratchPad.js" />
         <option value="$PROJECT_DIR$/Arduino.js" />
         <option value="$PROJECT_DIR$/Response.js" />
+        <option value="$PROJECT_DIR$/scratchPad.js" />
         <option value="$PROJECT_DIR$/Pi.js" />
       </list>
     </option>
@@ -226,7 +232,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70784000" />
+    <option name="totallyTimeSpent" value="71862000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -316,51 +322,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scratchPad.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="32" column="1" lean-forward="true" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Arduino.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="948">
-          <caret line="184" column="40" selection-start-line="184" selection-start-column="36" selection-end-line="184" selection-end-column="40" />
-          <folding>
-            <element signature="n#!!doc;n#constructor#0;n#Arduino#0" />
-            <element signature="n#!!block;n#constructor#0;n#Arduino#0" />
-            <element signature="n#!!block;n#setWateringSchedule#0;n#Arduino#0" />
-            <element signature="e#1491#2471#0" />
-            <element signature="e#2491#2541#0" />
-            <element signature="e#1802#1871#0" />
-            <element signature="e#1905#2146#0" />
-            <element signature="e#2008#2120#0" />
-            <element signature="e#2193#2433#0" />
-            <element signature="e#2296#2407#0" />
-            <element signature="n#!!block;n#clearWateringSchedule#0;n#Arduino#0" />
-            <element signature="e#2611#2671#0" />
-            <element signature="e#2733#2794#0" />
-            <element signature="n#!!block;n#reportSensors#0;n#Arduino#0" />
-            <element signature="e#3121#3232#0" />
-            <element signature="e#5148#5188#0" />
-            <element signature="n#!!block;n#startWater#0;n#Arduino#0" />
-            <element signature="e#3520#3633#0" />
-            <element signature="n#!!block;n#stopWater#0;n#Arduino#0" />
-            <element signature="e#3917#4030#0" />
-            <element signature="n#!!block;n#setDeviceId#0;n#Arduino#0" />
-            <element signature="e#4366#4490#0" />
-            <element signature="n#!!block;n#getSystemConfig#0;n#Arduino#0" />
-            <element signature="e#4795#4906#0" />
-            <element signature="n#!!doc;n#_generateChecksum#0;n#Arduino#0" />
-            <element signature="n#!!block;n#_generateChecksum#0;n#Arduino#0" />
-            <element signature="e#7248#7322#0" />
-            <element signature="e#8225#8446#0" />
-            <element signature="e#8268#8428#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Response.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="644">
@@ -386,16 +347,64 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scratchPad.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="23" column="22" lean-forward="true" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Arduino.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="88" column="64" selection-start-line="88" selection-start-column="64" selection-end-line="88" selection-end-column="64" />
+          <folding>
+            <element signature="n#!!doc;n#constructor#0;n#Arduino#0" />
+            <element signature="n#!!block;n#constructor#0;n#Arduino#0" />
+            <element signature="n#!!block;n#setWateringSchedule#0;n#Arduino#0" />
+            <element signature="e#1491#2471#0" />
+            <element signature="e#2491#2541#0" />
+            <element signature="e#1802#1871#0" />
+            <element signature="e#1905#2146#0" />
+            <element signature="e#2008#2120#0" />
+            <element signature="e#2193#2433#0" />
+            <element signature="e#2296#2407#0" />
+            <element signature="n#!!block;n#clearWateringSchedule#0;n#Arduino#0" />
+            <element signature="e#2611#2671#0" />
+            <element signature="e#2733#2794#0" />
+            <element signature="e#3121#3232#0" />
+            <element signature="e#4945#4969#0" />
+            <element signature="e#5148#5188#0" />
+            <element signature="n#!!block;n#startWater#0;n#Arduino#0" />
+            <element signature="e#3520#3633#0" />
+            <element signature="n#!!block;n#stopWater#0;n#Arduino#0" />
+            <element signature="e#3917#4030#0" />
+            <element signature="n#!!block;n#setDeviceId#0;n#Arduino#0" />
+            <element signature="e#4366#4490#0" />
+            <element signature="n#!!block;n#getSystemConfig#0;n#Arduino#0" />
+            <element signature="e#4795#4906#0" />
+            <element signature="n#!!doc;n#_generateChecksum#0;n#Arduino#0" />
+            <element signature="n#!!block;n#_generateChecksum#0;n#Arduino#0" />
+            <element signature="e#7248#7322#0" />
+            <element signature="e#8225#8446#0" />
+            <element signature="e#8268#8428#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Pi.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="216" column="14" selection-start-line="216" selection-start-column="14" selection-end-line="216" selection-end-column="14" />
+        <state relative-caret-position="323">
+          <caret line="65" column="64" selection-start-line="65" selection-start-column="64" selection-end-line="65" selection-end-column="64" />
           <folding>
             <element signature="n#!!block;n#constructor#0;n#Pi#0" />
             <element signature="n#!!block;n#reportSensors#0;n#Pi#0" />
             <element signature="n#!!block;n#updateApi#0;n#Pi#0" />
             <element signature="e#3444#4095#0" />
+            <element signature="n#!!block;n#discover#0;n#Pi#0" />
+            <element signature="e#4929#7385#0" />
             <element signature="e#5238#6111#0" />
+            <element signature="e#6463#7371#0" />
             <element signature="n#!!block;n#setup#0;n#Pi#0" />
             <element signature="n#!!block;n#_setupWifi#0;n#Pi#0" />
             <element signature="n#!!block;n#_getCredentials#0;n#Pi#0" />
