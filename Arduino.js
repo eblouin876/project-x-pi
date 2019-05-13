@@ -92,8 +92,11 @@ class Arduino {
         return new Promise((resolve, reject) => {
             let data = this.data;
             setTimeout(()=>reject("Timeout Error"), 5000);
-            while(JSON.stringify(data) === JSON.stringify(this.data)){}
-            resolve(this.data);
+            setInterval(()=>{
+                if(JSON.stringify(data) === JSON.stringify(this.data)) {
+                    resolve(this.data);
+                }
+            }, 250);
         })
     }
 
