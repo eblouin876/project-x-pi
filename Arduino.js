@@ -29,6 +29,8 @@ class Arduino {
         this.version = 1;
         this.companyId = 123;
         this.active = active;
+        this.incoming = "";
+        this.command = "";
     }
 
     // Method that sets the watering schedule whenever a new schedule comes in from the database
@@ -155,10 +157,25 @@ class Arduino {
             // Opens a new serial port to the assigned address
             this.serialPort = new SerialPort(this.comName);
             // Sets up a new parser to read commands that end with a ">"
-            this.serialPort.on("data", (res) => {
+            this.serialPort.on("readable", () => {
                 // Sends the data to the response handler to parse and send back
-                data = this.response.handle(res);
-                console.log("DATA Arduino:161", data.toString())
+                if(!this.incoming && this.serialPort.read().toString()[0]==="<") {
+                    this.incoming = this.serialPort.read().toString();
+                }
+                if(this.incoming) {
+                    this.incoming += this.serialPort.read().toString();
+                    if(this.incoming[this.incoming.length -1] === ">"){
+                        this.command = this.incoming;
+                        this.incoming = "";
+                        this.command.slice(1);
+                        this.command.pop();
+                        console.log(this.command);
+                        // let data = this.response.handle(this.command);
+                    }
+                }
+
+                // data = this.response.handle(data);
+                console.log("DATA Arduino:161", this.serialPort.read().toString())
                 // TODO: DO SOMETHING WITH THE DATA
             });
             // Returns a promise that resolves if it gets a ping back from the arduino and rejects after a 5s timeout
