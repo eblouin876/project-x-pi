@@ -3,6 +3,7 @@ const PusherClient = require('pusher-client');
 
 class livePusher {
     constructor(UID) {
+        // Sets up the pusher which communicates with the live update  listener on the server
         this.pusher = new Pusher({
             appId: '775254',
             key: 'b48dc9f2091a8e7665e9',
