@@ -6,6 +6,8 @@ class Response {
         this.version = 1;
     }
 
+    // TODO: Add handling for what to do when you receive a nack. Use a switch for different commands
+
     /**
      *
      * @param {String} response The string returned from the arduino to be parsed
