@@ -162,6 +162,8 @@ class Arduino {
     setup() {
         // Only runs setup if this instance of the arduino is active (i.e. plugged in and responding)
         if (this.active) {
+            // TODO: Handle setting the device id. Will have to interact with the pi that owns it to get the correct id
+
             // Creates a new instance of the response handler
             this.response = new Response(this.deviceId);
             // Opens a new serial port to the assigned address
