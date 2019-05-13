@@ -96,11 +96,11 @@ class Response {
     // Method that verifies the checksum to make sure it is correct
     _verifyChecksum(response) {
         //  Removes the first < character, splits to an array, and makes all values an int
-        let respArr = response.slice(1).split("~").map(a => parseInt(a));
+        let respArr = response.split("~");
         // removes the checksum from the array
         let checkSum = respArr.shift();
         // sums the remaining values in the array and stores as a temporary sum
-        let tmpSum = respArr.reduce((a, b) => a + b);
+        let tmpSum = respArr.reduce((a, b) =>{ if(a) return parseInt(a) + b});
         // returns a boolean checking the checkSum and tmpSum against each other
         return [checkSum === tmpSum, checkSum, tmpSum];
     }
