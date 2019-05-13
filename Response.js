@@ -16,31 +16,32 @@ class Response {
         let check = this._verifyChecksum(response);
         if (!check[0]) return `Checksum Error: Expected ${check[1]}, got ${check[2]}`;
         let respArr = this._parseResponse(response);
-        if (respArr[1] !== this.version || respArr[2] !== this.companyId || respArr[3] !== this.deviceId) return "Invalid response";
-        if (respArr[5] !== 0) return `An error occurred. Received: ${respArr[5]}`;
+        if (parseInt(respArr[1]) !== this.version || parseInt(respArr[2]) !== this.companyId) return "Invalid response";
+        if (parseInt(respArr[5]) !== 0) return `An error occurred. Received: ${respArr[5]}`;
         return this._getData(respArr[4], respArr[6], respArr[7])
     }
 
     // Method that parses the response and returns it as an array
     _parseResponse(response) {
         // Removes the first < and generates an array  splitting at the ~
-        const respArr = response.splice(1).split("~");
+        const respArr = response.split("~");
         // If the response contains data, it  makes an array out of the data
         if (respArr.length > 7) {
             let data = [];
-            for (let i = 7; i < respArr.length - 7; i++) {
+            for (let i = 7; i < respArr.length - 1; i++) {
                 data.push(respArr[i])
             }
             // truncates the initial array and adds the data array to the end of it
             respArr.length = 7;
             respArr.push(data);
         }
+        console.log("RESPONSE ARRAY: ",respArr);
         return respArr
     }
 
     // Method that handles interpreting the data based on what command was received **Data passed in as obj**
     _getData(command, config, data) {
-        switch (command) {
+        switch (parseInt(command)) {
             case 1:
                 // reportSensors
                 return this._parseConfig(config, data);
@@ -61,29 +62,30 @@ class Response {
     _parseConfig(config, data) {
         let dataIndex = 0;
         let parsedData = {};
+        console.log("DATA FROM ARD:", data);
         for (let i = 0; i < 8; i++) {
             // Bit sifts through config and checks each of the bytes
             if (config && (1 << i)) {
                 switch (1 << i) {
                     case 1:
-                        dataIndex++;
                         parsedData.pumpStatus = data[dataIndex];
+                        dataIndex++;
                         break;
                     case 2:
-                        dataIndex++;
                         parsedData.moisture = data[dataIndex];
+                        dataIndex++;
                         break;
                     case 4:
-                        dataIndex++;
                         parsedData.humidity = data[dataIndex];
+                        dataIndex++;
                         break;
                     case 8:
-                        dataIndex++;
                         parsedData.temperature = data[dataIndex];
+                        dataIndex++;
                         break;
                     case 16:
-                        dataIndex++;
                         parsedData.lightPin = data[dataIndex];
+                        dataIndex++;
                         break;
                     default:
                         break;
@@ -99,10 +101,11 @@ class Response {
         let respArr = response.split("~");
         // removes the checksum from the array
         let checkSum = respArr.shift();
+        respArr = respArr.filter(a => {if(a) return a});
         // sums the remaining values in the array and stores as a temporary sum
-        let tmpSum = respArr.reduce((a, b) =>{ if(b) return parseInt(a) + parseInt(b)});
+        let tmpSum = respArr.reduce((a, b) => parseInt(a) + parseInt(b));
         // returns a boolean checking the checkSum and tmpSum against each other
-        return [checkSum === tmpSum, checkSum, tmpSum];
+        return [parseInt(checkSum) === tmpSum, checkSum, tmpSum];
     }
 }
 

@@ -40,7 +40,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Arduino.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
+            <state relative-caret-position="815">
               <caret line="158" column="72" lean-forward="true" selection-start-line="158" selection-start-column="72" selection-end-line="158" selection-end-column="72" />
               <folding>
                 <element signature="n#!!doc;n#constructor#0;n#Arduino#0" />
@@ -61,31 +61,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Response.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="108" column="26" lean-forward="true" selection-start-line="108" selection-start-column="26" selection-end-line="108" selection-end-column="26" />
+            <state relative-caret-position="307">
+              <caret line="74" selection-start-line="74" selection-end-line="74" />
               <folding>
                 <element signature="n#!!block;n#constructor#0;n#Response#0" />
                 <element signature="n#!!doc;n#handle#0;n#Response#0" />
-                <element signature="n#!!block;n#_parseResponse#0;n#Response#0" />
-                <element signature="e#832#1045#0" />
-                <element signature="e#918#971#0" />
-                <element signature="n#!!block;n#_getData#0;n#Response#0" />
-                <element signature="e#1232#1774#0" />
-                <element signature="e#1263#1359#0" />
-                <element signature="e#1372#1488#0" />
-                <element signature="e#1501#1579#0" />
-                <element signature="e#1592#1690#0" />
-                <element signature="e#1703#1764#0" />
-                <element signature="n#!!block;n#_parseConfig#0;n#Response#0" />
-                <element signature="e#1907#2883#0" />
-                <element signature="e#1945#2873#0" />
-                <element signature="e#1963#2859#0" />
-                <element signature="e#2001#2141#0" />
-                <element signature="e#2162#2300#0" />
-                <element signature="e#2321#2459#0" />
-                <element signature="e#2480#2621#0" />
-                <element signature="e#2642#2781#0" />
-                <element signature="e#2802#2841#0" />
               </folding>
             </state>
           </provider>
@@ -211,7 +191,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64280000" />
+    <option name="totallyTimeSpent" value="66315000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -330,7 +310,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Arduino.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
+        <state relative-caret-position="815">
           <caret line="158" column="72" lean-forward="true" selection-start-line="158" selection-start-column="72" selection-end-line="158" selection-end-column="72" />
           <folding>
             <element signature="n#!!doc;n#constructor#0;n#Arduino#0" />
@@ -349,31 +329,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Response.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="108" column="26" lean-forward="true" selection-start-line="108" selection-start-column="26" selection-end-line="108" selection-end-column="26" />
+        <state relative-caret-position="307">
+          <caret line="74" selection-start-line="74" selection-end-line="74" />
           <folding>
             <element signature="n#!!block;n#constructor#0;n#Response#0" />
             <element signature="n#!!doc;n#handle#0;n#Response#0" />
-            <element signature="n#!!block;n#_parseResponse#0;n#Response#0" />
-            <element signature="e#832#1045#0" />
-            <element signature="e#918#971#0" />
-            <element signature="n#!!block;n#_getData#0;n#Response#0" />
-            <element signature="e#1232#1774#0" />
-            <element signature="e#1263#1359#0" />
-            <element signature="e#1372#1488#0" />
-            <element signature="e#1501#1579#0" />
-            <element signature="e#1592#1690#0" />
-            <element signature="e#1703#1764#0" />
-            <element signature="n#!!block;n#_parseConfig#0;n#Response#0" />
-            <element signature="e#1907#2883#0" />
-            <element signature="e#1945#2873#0" />
-            <element signature="e#1963#2859#0" />
-            <element signature="e#2001#2141#0" />
-            <element signature="e#2162#2300#0" />
-            <element signature="e#2321#2459#0" />
-            <element signature="e#2480#2621#0" />
-            <element signature="e#2642#2781#0" />
-            <element signature="e#2802#2841#0" />
           </folding>
         </state>
       </provider>
