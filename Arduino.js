@@ -155,29 +155,27 @@ class Arduino {
             // Opens a new serial port to the assigned address
             this.serialPort = new SerialPort(this.comName);
             // Sets up a new parser to read commands that end with a ">"
-            this.parser = this.serialPort.pipe(new Delimiter({delimiter: ">"}));
-            this.parser.on("data", (res) => {
+            this.serialPort.on("data", (res) => {
                 // Sends the data to the response handler to parse and send back
                 data = this.response.handle(res);
-                console.log("DATA Arduino:162", data)
+                console.log("DATA Arduino:161", data.toString())
                 // TODO: DO SOMETHING WITH THE DATA
             });
-            this.serialPort.on('data', data => console.log("SerialPort 165:",data));
             // Returns a promise that resolves if it gets a ping back from the arduino and rejects after a 5s timeout
             return new Promise((resolve, reject) => {
                 // Sets a new instance of the listener that handles this specific case
-                let parser = this.serialPort.pipe(new Delimiter({delimiter: ">"}));
+                // let parser = this.serialPort.pipe(new Delimiter({delimiter: ">"}));
                 // Sends a ping to the attached arduino to get its system config
                 let ping = setInterval(() => this.getSystemConfig(), 1000);
-                parser.on("data", data => {
-                    let dataArr = data.split("~");
-                    // Checks the response for the command received being 5 and for a status > 0 TODO: Update  this to match the document. good shold be 0
-                    if (dataArr[4] === "5" && dataArr[5] > 0) {
-                        this.status = parseInt(dataArr[1]);
-                    } else {
-                        log(data);
-                    }
-                });
+                // parser.on("data", data => {
+                //     let dataArr = data.split("~");
+                //     // Checks the response for the command received being 5 and for a status > 0 TODO: Update  this to match the document. good shold be 0
+                //     if (dataArr[4] === "5" && dataArr[5] > 0) {
+                //         this.status = parseInt(dataArr[1]);
+                //     } else {
+                //         log(data);
+                //     }
+                // });
                 // Sets an interval that will resolve on status change, waiting  for an  ack from the arduino
                 let check = setInterval(() => {
                     if (this.status > 0) {

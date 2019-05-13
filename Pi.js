@@ -203,7 +203,7 @@ class Pi {
     //    TODO: REMOVE AFTER TESTING
         setInterval(() => this.reportSensors(), 300000);
         this.arduinos.forEach(arduino => {
-            arduino.startWater()
+            arduino.startWater();
             setTimeout(()=> arduino.stopWater(), 5000);
         });
 
