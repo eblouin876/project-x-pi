@@ -93,7 +93,7 @@ class Arduino {
             let data = this.data;
             setTimeout(()=>reject("Timeout Error"), 5000);
             setInterval(()=>{
-                if(JSON.stringify(data) === JSON.stringify(this.data)) {
+                if(data !== this.data) {
                     resolve(this.data);
                 }
             }, 250);

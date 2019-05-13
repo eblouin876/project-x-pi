@@ -17,6 +17,7 @@ class Pi {
         this._username = "";
         this._password = "";
         this._UID = "";
+        this._sensorData = {};
         // The interceptor adds the user to the header object in the request if authentication has occurred properly
         this.interceptor = axios.interceptors.request.use((config) => {
             if (this._UID) {
@@ -73,17 +74,16 @@ class Pi {
     }
 
     // Loop over all the arduinos and have them return their status with the serial number associated
-    reportSensors() {
+     reportSensors() {
         if (this.arduinos.length) {
-            let data = {};
-            this.arduinos.forEach(async arduino => {
+             this.arduinos.forEach(async arduino => {
                 // Checks that the arduino is flagged active
                 if (arduino.active) {
                     // Has the arduino ask its sensors for data (stored in arduino.data)
-                    data[arduino.serialNumber] = await arduino.reportSensors();
+                    await arduino.reportSensors();
+                    this._sensorData[arduino.serialNumber] = arduino.data
                 }
             });
-            return data;
         } else {
             return "No devices present"
         }
@@ -200,7 +200,11 @@ class Pi {
         // Has the report sensors method run every 30 seconds - if there is an error, it should handle it.
         this.statusChecker = setInterval(() => this.reportSensors(), 300000); //TODO: This just returns data, doesn't yet do anything with it. Error handling should go here
     //    TODO: REMOVE AFTER TESTING
-        setInterval(() => log(this.reportSensors()), 5000);
+        setInterval(() => this.reportSensors(), 5000);
+        setInterval(()=> {
+            log(this._sensorData);
+            log(this.arduinos);
+        }, 7000);
     }
 
     // Initial script that will have the user connect to wifi and log in to their account
