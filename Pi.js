@@ -115,6 +115,8 @@ class Pi {
             })
     }
 
+    // TODO: Add a method that checks each arduino's schedule against the status for its  pump. If the pump is on, turn it off and show a warning
+
     // Searches for any devices plugged in that are made by arduino, then registers them if they have not been previously registered
     // or re-registers them to the appropriate comName
     async discover() {

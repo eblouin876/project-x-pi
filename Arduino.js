@@ -86,7 +86,7 @@ class Arduino {
     reportSensors() {
         let command = 1;
         let checksum = this._generateChecksum(command);
-        console.log(`<${checksum}~${this.version}~${this.companyId}~255~${command}>`); //TODO: REMOVE before prod
+        console.log(`Sent: <${checksum}~${this.version}~${this.companyId}~255~${command}>`); //TODO: REMOVE before prod
         if (this.serialPort) {
             this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~255~${command}>`)
         }
@@ -105,7 +105,7 @@ class Arduino {
     startWater() {
         let command = 3;
         let checksum = this._generateChecksum(command, 1, 255);
-        console.log(`<${checksum}~${this.version}~${this.companyId}~255~${command}~1>`); //TODO: REMOVE before prod
+        console.log(`Sent: <${checksum}~${this.version}~${this.companyId}~255~${command}~1>`); //TODO: REMOVE before prod
         if (this.serialPort) {
             this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~255~${command}~1>`)
         }
@@ -115,7 +115,7 @@ class Arduino {
     stopWater() {
         let command = 3;
         let checksum = this._generateChecksum(command, 0);
-        console.log(`<${checksum}~${this.version}~${this.companyId}~255~${command}~0>`); //TODO: REMOVE before prod
+        console.log(`Sent: <${checksum}~${this.version}~${this.companyId}~255~${command}~0>`); //TODO: REMOVE before prod
         if (this.serialPort) {
             this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~255~${command}~0>`)
         }
@@ -126,7 +126,7 @@ class Arduino {
         let command = 4;
         let checksum = this._generateChecksum(command, DID);
         let deviceId = DID;
-        console.log(`<${checksum}~${this.version}~${this.companyId}~255~${command}~${deviceId}>`); //TODO: REMOVE before prod
+        console.log(`Sent: <${checksum}~${this.version}~${this.companyId}~255~${command}~${deviceId}>`); //TODO: REMOVE before prod
         if (this.serialPort) {
             this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~255~${command}~${deviceId}>`);
         }
@@ -136,7 +136,7 @@ class Arduino {
     getSystemConfig() {
         let command = 5;
         let checksum = this._generateChecksum(command);
-        console.log(`<${checksum}~${this.version}~${this.companyId}~255~${command}>`); //TODO: REMOVE before prod
+        console.log(`Sent: <${checksum}~${this.version}~${this.companyId}~255~${command}>`); //TODO: REMOVE before prod
         if (this.serialPort) {
             this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~255~${command}>`)
         }
@@ -177,7 +177,7 @@ class Arduino {
                     if(this.incoming[this.incoming.length -1] === ">"){
                         this.command = this.incoming.slice(1,-1);
                         this.incoming = "";
-                        // console.log("ARDUINO 170:",this.command);
+                        console.log("Received:",this.command);
                         let data = this.response.handle(this.command);
                         this.status = data[0];
                         this.data = data[1];
