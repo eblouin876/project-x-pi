@@ -159,8 +159,8 @@ class Arduino {
             // Sets up a new parser to read commands that end with a ">"
             this.serialPort.on("readable", () => {
                 let message = this.serialPort.read().toString();
-                // Sends the data to the response handler to parse and send back
-                if(!this.incoming && message[0]==="<") {
+                // Checks for the start of a message. This will overwrite a previous message that was incomplete
+                if(message[0]==="<") {
                     this.incoming = message;
                 }
                 if(this.incoming) {
