@@ -35,7 +35,7 @@ class Response {
             respArr.length = 7;
             respArr.push(data);
         }
-        console.log("RESPONSE ARRAY: ",respArr);
+        // console.log("RESPONSE ARRAY: ",respArr);
         return respArr
     }
 
@@ -62,7 +62,7 @@ class Response {
     _parseConfig(config, data) {
         let dataIndex = 0;
         let parsedData = {};
-        console.log("DATA FROM ARD:", data);
+        // console.log("DATA FROM ARD:", data);
         for (let i = 0; i < 8; i++) {
             // Bit sifts through config and checks each of the bytes
             if (config && (1 << i)) {

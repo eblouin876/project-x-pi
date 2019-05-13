@@ -1,6 +1,6 @@
 const Pusher = require("./Pusher");
 const Arduino = require("./Arduino");
-const log = require("con-logger");
+//const log = require("con-logger");
 const SerialPort = require("serialport");
 const axios = require("axios");
 const inquirer = require("inquirer");
@@ -74,7 +74,7 @@ class Pi {
     }
 
     // Loop over all the arduinos and have them return their status with the serial number associated
-     reportSensors() {
+    reportSensors() {
         if (this.arduinos.length) {
              this.arduinos.forEach(async arduino => {
                 // Checks that the arduino is flagged active
@@ -198,13 +198,10 @@ class Pi {
         const discover = this.discover.bind(this);
         this.discovery = setInterval(discover, 5000);
         // Has the report sensors method run every 30 seconds - if there is an error, it should handle it.
-        this.statusChecker = setInterval(() => this.reportSensors(), 300000); //TODO: This just returns data, doesn't yet do anything with it. Error handling should go here
-    //    TODO: REMOVE AFTER TESTING
-        setInterval(() => this.reportSensors(), 5000);
-        setInterval(()=> {
-            log(this._sensorData);
-            log(this.arduinos);
-        }, 7000);
+        this.statusChecker = setInterval(() => {
+            this.reportSensors();
+            setTimeout(()=>this.updateApi(), 2000);
+        }, 300000); //TODO: This just returns data, doesn't yet do anything with it. Error handling should go here
     }
 
     // Initial script that will have the user connect to wifi and log in to their account

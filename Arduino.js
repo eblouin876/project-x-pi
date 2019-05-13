@@ -1,5 +1,4 @@
 const SerialPort = require("serialport");
-const Delimiter = require("@serialport/parser-delimiter");
 const log = require("con-logger");
 const moment = require("moment");
 const Response = require("./Response");
@@ -33,6 +32,8 @@ class Arduino {
         this.command = "";
     }
 
+    // TODO: GET SETID WORKING AND REMOVE HARDCODED 255 FROM ALL OF THE COMMANDS SO IT IS TO UNIQUE DEVICEID
+
     // Method that sets the watering schedule whenever a new schedule comes in from the database
     // Will clear previous timers, take in the object, parse it, and  set intervals based on the input
     setWateringSchedule() {
@@ -53,7 +54,7 @@ class Arduino {
                     this.startWater();
                     // Set an interval that runs once a week at the same time
                     this.waterOnTimers.push(setInterval(() => {
-                        log("starting water");
+                        console.log("starting water", this.deviceId);
                         this.startWater();
                     }, week))
                 }, timeUntil);
@@ -63,7 +64,7 @@ class Arduino {
                     this.stopWater();
                     // A weekly interval at the same time that will turn the water off
                     this.waterOffTimers.push(setInterval(() => {
-                        log("stopping water");
+                        console.log("stopping water", this.deviceId);
                         this.stopWater();
                     }, week))
                 }, timeUntil + duration);
@@ -85,7 +86,7 @@ class Arduino {
     reportSensors() {
         let command = 1;
         let checksum = this._generateChecksum(command);
-        log(`<${checksum}~${this.version}~${this.companyId}~255~${command}>`); //TODO: REMOVE before prod
+        console.log(`<${checksum}~${this.version}~${this.companyId}~255~${command}>`); //TODO: REMOVE before prod
         if (this.serialPort) {
             this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~255~${command}>`)
         }
@@ -104,7 +105,7 @@ class Arduino {
     startWater() {
         let command = 3;
         let checksum = this._generateChecksum(command, 1, 255);
-        log(`<${checksum}~${this.version}~${this.companyId}~255~${command}~1>`); //TODO: REMOVE before prod
+        console.log(`<${checksum}~${this.version}~${this.companyId}~255~${command}~1>`); //TODO: REMOVE before prod
         if (this.serialPort) {
             this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~255~${command}~1>`)
         }
@@ -114,7 +115,7 @@ class Arduino {
     stopWater() {
         let command = 3;
         let checksum = this._generateChecksum(command, 0);
-        log(`<${checksum}~${this.version}~${this.companyId}~255~${command}~0>`); //TODO: REMOVE before prod
+        console.log(`<${checksum}~${this.version}~${this.companyId}~255~${command}~0>`); //TODO: REMOVE before prod
         if (this.serialPort) {
             this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~255~${command}~0>`)
         }
@@ -125,7 +126,7 @@ class Arduino {
         let command = 4;
         let checksum = this._generateChecksum(command, DID);
         let deviceId = DID;
-        log(`<${checksum}~${this.version}~${this.companyId}~255~${command}~${deviceId}>`); //TODO: REMOVE before prod
+        console.log(`<${checksum}~${this.version}~${this.companyId}~255~${command}~${deviceId}>`); //TODO: REMOVE before prod
         if (this.serialPort) {
             this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~255~${command}~${deviceId}>`);
         }
@@ -135,7 +136,7 @@ class Arduino {
     getSystemConfig() {
         let command = 5;
         let checksum = this._generateChecksum(command);
-        log(`<${checksum}~${this.version}~${this.companyId}~255~${command}>`); //TODO: REMOVE before prod
+        console.log(`<${checksum}~${this.version}~${this.companyId}~255~${command}>`); //TODO: REMOVE before prod
         if (this.serialPort) {
             this.serialPort.write(`<${checksum}~${this.version}~${this.companyId}~255~${command}>`)
         }
@@ -176,14 +177,13 @@ class Arduino {
                     if(this.incoming[this.incoming.length -1] === ">"){
                         this.command = this.incoming.slice(1,-1);
                         this.incoming = "";
-                        console.log("ARDUINO 170:",this.command);
+                        // console.log("ARDUINO 170:",this.command);
                         let data = this.response.handle(this.command);
                         this.status = data[0];
                         this.data = data[1];
-                        console.log("ARDUINO DATA 172:",data)
+                        // console.log("ARDUINO DATA 172:",data)
                     }
                 }
-                // TODO: DO SOMETHING WITH THE DATA
             });
             // Returns a promise that resolves if it gets a ping back from the arduino and rejects after a 5s timeout
             return new Promise((resolve, reject) => {
