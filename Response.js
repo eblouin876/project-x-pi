@@ -14,11 +14,11 @@ class Response {
      */
     handle(response) {
         let check = this._verifyChecksum(response);
-        if (!check[0]) return `Checksum Error: Expected ${check[1]}, got ${check[2]}`;
+        if (!check[0]) return [1, `Checksum Error: Expected ${check[1]}, got ${check[2]}`];
         let respArr = this._parseResponse(response);
-        if (parseInt(respArr[1]) !== this.version || parseInt(respArr[2]) !== this.companyId) return "Invalid response";
-        if (parseInt(respArr[5]) !== 0) return `An error occurred. Received: ${respArr[5]}`;
-        return this._getData(respArr[4], respArr[6], respArr[7])
+        if (parseInt(respArr[1]) !== this.version || parseInt(respArr[2]) !== this.companyId) return [1, "Invalid response"];
+        if (parseInt(respArr[5]) !== 0) return [1, `An error occurred. Received: ${respArr[5]}`];
+        return [0, this._getData(respArr[4], respArr[6], respArr[7])]
     }
 
     // Method that parses the response and returns it as an array

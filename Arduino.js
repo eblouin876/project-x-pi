@@ -169,32 +169,18 @@ class Arduino {
                         this.incoming = "";
                         console.log("ARDUINO 170:",this.command);
                         let data = this.response.handle(this.command);
+                        this.status = data[0];
                         console.log("ARDUINO DATA 172:",data)
                     }
                 }
-
-                // data = this.response.handle(data);
-                // console.log("DATA Arduino:161", this.serialPort.read().toString())
                 // TODO: DO SOMETHING WITH THE DATA
             });
             // Returns a promise that resolves if it gets a ping back from the arduino and rejects after a 5s timeout
             return new Promise((resolve, reject) => {
-                // Sets a new instance of the listener that handles this specific case
-                // let parser = this.serialPort.pipe(new Delimiter({delimiter: ">"}));
                 // Sends a ping to the attached arduino to get its system config
                 let ping = setInterval(() => this.getSystemConfig(), 1000);
-                // parser.on("data", data => {
-                //     let dataArr = data.split("~");
-                //     // Checks the response for the command received being 5 and for a status > 0 TODO: Update  this to match the document. good shold be 0
-                //     if (dataArr[4] === "5" && dataArr[5] > 0) {
-                //         this.status = parseInt(dataArr[1]);
-                //     } else {
-                //         log(data);
-                //     }
-                // });
-                // Sets an interval that will resolve on status change, waiting  for an  ack from the arduino
                 let check = setInterval(() => {
-                    if (this.status > 0) {
+                    if (this.status === 0) {
                         clearInterval(check);
                         clearInterval(ping);
                         resolve(this.status);
