@@ -158,24 +158,24 @@ class Arduino {
             this.serialPort = new SerialPort(this.comName);
             // Sets up a new parser to read commands that end with a ">"
             this.serialPort.on("readable", () => {
+                let message = this.serialPort.read().toString();
                 // Sends the data to the response handler to parse and send back
-                if(!this.incoming && this.serialPort.read().toString()[0]==="<") {
-                    this.incoming = this.serialPort.read().toString();
+                if(!this.incoming && message[0]==="<") {
+                    this.incoming = message;
                 }
                 if(this.incoming) {
-                    this.incoming += this.serialPort.read().toString();
+                    this.incoming += message;
                     if(this.incoming[this.incoming.length -1] === ">"){
-                        this.command = this.incoming;
+                        this.command = this.incoming.slice(1,-1);
+                        console.log("ARDUINO 170:", this.incoming);
                         this.incoming = "";
-                        this.command.slice(1);
-                        this.command.pop();
-                        console.log(this.command);
+                        console.log("ARDUINO 172",this.command);
                         // let data = this.response.handle(this.command);
                     }
                 }
 
                 // data = this.response.handle(data);
-                console.log("DATA Arduino:161", this.serialPort.read().toString())
+                // console.log("DATA Arduino:161", this.serialPort.read().toString())
                 // TODO: DO SOMETHING WITH THE DATA
             });
             // Returns a promise that resolves if it gets a ping back from the arduino and rejects after a 5s timeout
