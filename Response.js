@@ -13,7 +13,8 @@ class Response {
      * @returns {string|*|string}
      */
     handle(response) {
-        if (!this._verifyChecksum(response)) return "Checksum Error";
+        let check = this._verifyChecksum(response);
+        if (!check[0]) return `Checksum Error: Expected ${check[1]}, got ${check[2]}`;
         let respArr = this._parseResponse(response);
         if (respArr[1] !== this.version || respArr[2] !== this.companyId || respArr[3] !== this.deviceId) return "Invalid response";
         if (respArr[5] !== 0) return `An error occurred. Received: ${respArr[5]}`;
@@ -101,7 +102,7 @@ class Response {
         // sums the remaining values in the array and stores as a temporary sum
         let tmpSum = respArr.reduce((a, b) => a + b);
         // returns a boolean checking the checkSum and tmpSum against each other
-        return checkSum === tmpSum;
+        return [checkSum === tmpSum, checkSum, tmpSum];
     }
 }
 
